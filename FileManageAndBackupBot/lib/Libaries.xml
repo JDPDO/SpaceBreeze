@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Libary Name="FluentFTP"
+        Author="robinrodricks" 
+        Origin="https://github.com/robinrodricks/FluentFTP.git"
+        Path="robinrodricks.FluentFTP" />
