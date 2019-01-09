@@ -1,3 +1,6 @@
 [submodule "FileManageAndBackupBot/lib/robinrodricks.FluentFTP"]
 	path = FileManageAndBackupBot/lib/robinrodricks.FluentFTP
 	url = https://github.com/robinrodricks/FluentFTP.git
+[submodule "FileManageAndBackupBot/lib/xunit.xUnit"]
+	path = FileManageAndBackupBot/lib/xunit.xUnit
+	url = https://github.com/xunit/xunit.git
