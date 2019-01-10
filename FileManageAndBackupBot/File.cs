@@ -25,12 +25,19 @@ namespace FileManageAndBackupBot
             if (_uri.IsFile) this.uri = _uri;
         }
 
-        public bool MoveFile(string destFileName)
+        /// <summary>
+        /// Copies the current file of file object and sets the current file uri to {destFileUri}.
+        /// </summary>
+        /// <param name="destFileUri">Location uri of copied file.</param>
+        /// <param name="overwrite">Defines, if occupied file destination should be overwritten.</param>
+        /// <returns>Returns true if job finished without error.</returns>
+        public bool CopyFile(string destFileUri, bool overwrite)
         {
-            Uri newUri = new Uri(this.uri.AbsolutePath + destFileName);
+            Uri newUri = new Uri(destFileUri);
             try
             {
-                IO.File.Move(uri.AbsoluteUri, newUri.AbsoluteUri);
+                IO.File.Copy(uri.AbsoluteUri, newUri.AbsoluteUri);
+                uri = newUri;
             }
             catch (IO.IOException e)
             {
@@ -39,31 +46,74 @@ namespace FileManageAndBackupBot
                     "because the specified part of the file is not avaiable.",
                     e.GetType().Name);
                 return false;
-                throw e;
+                //throw e;
             }
             catch (Exception e)
             {
                 Console.Error.WriteLine("{0}: An error occured",
                     e.GetType().Name);
                 return false;
-                throw e;
+                //throw e;
             }
             return true;
         }
 
+        /// <summary>
+        /// Copies the current file of file object and sets the current file uri to {destFileUri},
+        /// if file destination is not occupied.
+        /// </summary>
+        /// <param name="destFileUri">Location uri of copied file.</param>
+        /// <returns>Returns true if job finished without error.</returns>
+        public bool CopyFile(string destFileUri)
+        {
+            return CopyFile(destFileUri, false);
+        }
+
+        /// <summary>
+        /// Moves the current file of file object and sets the current file uri to {destFileUri}.
+        /// </summary>
+        /// <param name="destFileUri">Location uri of moved file.</param>
+        /// <param name="overwrite">Defines, if occupied file destination should be overwritten.</param>
+        /// <returns>Returns true if job finished without error.</returns>
+        public bool MoveFile(string destFileUri, bool overwrite)
+        {
+            bool isCopied = CopyFile(destFileUri, overwrite);
+            if (isCopied)
+            {
+                IO.File.Delete(uri.AbsoluteUri);
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Moves the current file of file object and sets the current file uri to {destFileUri}.
+        /// </summary>
+        /// <param name="destFileUri">Location uri of copied file.</param>
+        /// <returns>Returns true if job finished without error.</returns>
+        public bool MoveFile(string destFileUri)
+        {
+            return MoveFile(destFileUri, false);
+        }
+
+        /// <summary>
+        /// Rename the current file of file object.
+        /// </summary>
+        /// <param name="destFileName">New file name.</param>
+        /// <returns>Returns true if job finished without error.</returns>
+        public bool ChangeFileName(string destFileName, bool overwrite)
+        {
+            return MoveFile(uri.AbsolutePath + destFileName, overwrite);
+        }
+
+        /// <summary>
+        /// Rename the current file of file object, if file destination is not occupied.
+        /// </summary>
+        /// <param name="destFileName">New file name.</param>
+        /// <returns>Returns true if job finished without error.</returns>
         public bool ChangeFileName(string destFileName)
         {
-            Uri newUri = new Uri(this.uri.AbsolutePath + destFileName);
-            try
-            {
-                MoveFile(newUri.AbsoluteUri);
-            }
-            catch (Exception e)
-            {
-                return false;
-                throw e;
-            }
-            return true;
+            return ChangeFileName(destFileName, false);
         }
     }
 }
