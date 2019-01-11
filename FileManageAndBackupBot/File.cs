@@ -5,9 +5,11 @@ using IO = System.IO;
 
 namespace FileManageAndBackupBot
 {
-    public class File
+    public class File : IO.FileSystemInfo, IFileSystemItem
     {
+        // private fields
         private Uri uri;
+        private IO.FileInfo fileInfo;
 
         public Uri Uri { get { return uri; }
             set
@@ -18,6 +20,16 @@ namespace FileManageAndBackupBot
                 }
             }
         }
+
+        /// <summary>
+        /// Returns true if file exists.
+        /// </summary>
+        public override bool Exists => fileInfo.Exists;
+
+        /// <summary>
+        /// Returns file name.
+        /// </summary>
+        public override string Name => fileInfo.Name;
 
         public File(string uri)
         {
@@ -50,7 +62,7 @@ namespace FileManageAndBackupBot
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine("{0}: An error occured",
+                Console.Error.WriteLine("{0}: An error occured.",
                     e.GetType().Name);
                 return false;
                 //throw e;
@@ -114,6 +126,31 @@ namespace FileManageAndBackupBot
         public bool ChangeFileName(string destFileName)
         {
             return ChangeFileName(destFileName, false);
+        }
+
+        /// <summary>
+        /// Returns file location uri.
+        /// </summary>
+        public Uri GetUri() => uri;
+
+        /// <summary>
+        /// Returns all file attributes.
+        /// </summary>
+        public IO.FileAttributes GetFileAttributes() => new IO.FileInfo(uri.AbsoluteUri).Attributes;
+
+        /// <summary>
+        /// Deletes file.
+        /// </summary>
+        public override void Delete()
+        {
+            try
+            {
+                IO.File.Delete(uri.AbsolutePath);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine("{0}: An error occured.", e.GetType().Name);
+            }
         }
     }
 }
