@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 using IO = System.IO;
 
 namespace FileManageAndBackupBot
 {
-    class Directory : IO.FileSystemInfo, IFileSystemItem
+    public class Directory : IO.FileSystemInfo, IFileSystemItem
     {
         // private fields
         private Uri uri;
@@ -40,13 +41,13 @@ namespace FileManageAndBackupBot
         /// <param name="path"></param>
         public Directory(string path)
         {
-            if (Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
-            {
+            //if (Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
+            //{
                 uri = new Uri(path);
                 directoryInfo = new IO.DirectoryInfo(path);
                 if (!Exists) IO.Directory.CreateDirectory(path);
-            }
-            else throw new Exception("Directory path is wrong formed.");
+            //}
+            //else throw new Exception("Directory path is wrong formed.");
         }
 
         public Uri GetUri() => Uri;
@@ -64,6 +65,25 @@ namespace FileManageAndBackupBot
             {
                 Console.Error.WriteLine("{0}: An error occured.", e.GetType().Name);
             }
+        }
+
+        public string[] GetChildrenNames()
+        {
+            var children = GetChildren();
+            List<string> output = new List<string>();
+            foreach (var child in children) output.Add(child.Name);
+            return output.ToArray();
+        }
+
+        public IO.FileSystemInfo[] GetChildren()
+        {
+            IO.DirectoryInfo[] directories = directoryInfo.GetDirectories();
+            IO.FileInfo[] files = directoryInfo.GetFiles();
+            List<IO.FileSystemInfo> children = new List<IO.FileSystemInfo>();
+
+            foreach (var directory in directories) children.Add(directory);
+            foreach (var file in files) children.Add(file);
+            return children.ToArray();
         }
     }
 }
