@@ -11,6 +11,7 @@ namespace FileManageAndBackupBot
         private Uri uri;
         private IO.FileInfo fileInfo;
 
+        // public property
         public Uri Uri { get { return uri; }
             set
             {
@@ -31,10 +32,28 @@ namespace FileManageAndBackupBot
         /// </summary>
         public override string Name => fileInfo.Name;
 
+        /// <summary>
+        /// Creates new File object with predefined uri string.
+        /// </summary>
+        /// <param name="uri">Uri string refering to file.  </param>
         public File(string uri)
         {
             Uri _uri = new Uri(uri);
-            if (_uri.IsFile) this.uri = _uri;
+            if (_uri.IsFile)
+            {
+                this.uri = _uri;
+                fileInfo = new IO.FileInfo(uri);
+            }
+        }
+
+        /// <summary>
+        /// Creates new File object with predefined uri object.
+        /// </summary>
+        /// <param name="uri">Uri object refering to file.</param>
+        public File(Uri uri)
+        {
+            if (uri.IsFile) this.uri = uri;
+            fileInfo = new IO.FileInfo(uri.AbsoluteUri);
         }
 
         /// <summary>
@@ -151,6 +170,15 @@ namespace FileManageAndBackupBot
             {
                 Console.Error.WriteLine("{0}: An error occured.", e.GetType().Name);
             }
+        }
+
+        /// <summary>
+        /// Returns false.
+        /// </summary>
+        /// <returns>Returns false.</returns>
+        public bool IsDirectory()
+        {
+            return false;
         }
     }
 }
