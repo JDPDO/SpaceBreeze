@@ -5,8 +5,12 @@ using System.IO;
 
 namespace FileManageAndBackupBot
 {
-    interface IFileSystemItem
+    public interface IFileSystemItem
     {
+        void Delete();
+        string FullName { get; }
         Uri GetUri();
+        bool IsDirectory();
+        void Move(string destPath);
     }
 }

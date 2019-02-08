@@ -9,11 +9,11 @@ namespace FileManageAndBackupBot
     {
         public class DirectoryNode
         {
-            private Directory directory;
+            private LocalDirectory directory;
             private List<File> childFiles;
-            private List<Directory> childDirs;
+            private List<LocalDirectory> childDirs;
 
-            public Directory Directory
+            public LocalDirectory Directory
             {
                 get => directory;
             }
@@ -23,7 +23,7 @@ namespace FileManageAndBackupBot
                 get => childFiles.ToArray();
             }
 
-            public DirectoryNode(Directory directory)
+            public DirectoryNode(LocalDirectory directory)
             {
                 this.directory = directory;
                 string[] children = directory.GetChildrenNames();
@@ -32,22 +32,22 @@ namespace FileManageAndBackupBot
                 {
                     Uri uri = new Uri(directory.FullName + child);
                     if (uri.IsFile) childFiles.Add(new File(uri));
-                    else childDirs.Add(new Directory(uri));
+                    else childDirs.Add((LocalDirectory)Activator.CreateInstance(typeof(LocalDirectory), uri));
                 }
             }
         }
 
         //DirectoryNode startNode;
-        Directory startDirectory;
+        LocalDirectory startLocalDirectory;
         int layer;
 
         /// <summary>
         /// Creates a new file tree object using custom root driectory object.
         /// </summary>
         /// <param name="directory">The managing directory object of root directory.</param>
-        public FileTree(Directory directory)
+        public FileTree(LocalDirectory directory)
         {
-            startDirectory = directory;
+            startLocalDirectory = directory;
             layer = 0;
         }
 
@@ -57,7 +57,7 @@ namespace FileManageAndBackupBot
         /// <param name="path">The path of custom root directory in file system.</param>
         public FileTree(string path)
         {
-            startDirectory = new Directory(path);
+            startLocalDirectory = (LocalDirectory)Activator.CreateInstance(typeof(LocalDirectory), path);
             layer = 0;
         }
 
@@ -68,7 +68,7 @@ namespace FileManageAndBackupBot
         /// <param name="layer">The layer since custom root directory.</param>
         private FileTree(string path, int layer)
         {
-            startDirectory = new Directory(path);
+            startLocalDirectory = (LocalDirectory)Activator.CreateInstance(typeof(LocalDirectory), path);
             this.layer = layer;
         }
 
@@ -77,7 +77,7 @@ namespace FileManageAndBackupBot
         /// </summary>
         public void PrintFileTree()
         {
-            IO.FileSystemInfo[] children = startDirectory.GetChildren();
+            IO.FileSystemInfo[] children = startLocalDirectory.GetChildren();
             foreach (var child in children)
             {
                 PrintLine(layer, child.Name);
