@@ -180,5 +180,10 @@ namespace FileManageAndBackupBot
         {
             return false;
         }
+
+        public void Move(string destPath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
