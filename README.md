@@ -14,3 +14,7 @@
   | CLI | Contains all parts for a console application. |
   | UI | Contains all resources for the UI interface of the app. |
   | Protocols | Contains implematation of required and optional Protocols, such as FTP. |
+
+## Branchnames prefixes
+  Feature adding branch: f_
+  Problem solving branch: p_
