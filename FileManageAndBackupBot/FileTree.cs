@@ -18,6 +18,33 @@ namespace FileManageAndBackupBot
         private List<FileTree> subTrees;
 
         /// <summary>
+        /// Retruns and sets the RootDirectory of the fileTree object,
+        /// but to set the value may causes problems, because the object is not reinitialized.
+        /// </summary>
+        public IO.DirectoryInfo RootDirectory
+        {
+            get
+            {
+                return startDirectory;
+            }
+            set
+            {
+                startDirectory = value;
+            }
+        }
+
+        /// <summary>
+        /// Retruns the number of the current layer since the higest FileTree object.
+        /// </summary>
+        public int Layer
+        {
+            get
+            {
+                return layer;
+            }
+        }
+
+        /// <summary>
         /// Creates a new file tree object using custom root driectory object.
         /// </summary>
         /// <param name="startDirectory">The managing directory object of root directory.</param>
@@ -112,8 +139,6 @@ namespace FileManageAndBackupBot
             }
             return foundElements;
         }
-
-
 
         /// <summary>
         /// Prints all subfiles and subdirectories of current one hierarchically in output console.
