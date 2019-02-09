@@ -6,22 +6,22 @@ using IO = System.IO;
 namespace FileManageAndBackupBot
 {
     /// <summary>
-    /// Represents a tree with a root directoy and subordinated files and directories.
+    /// Represents a tree with a root directory and subordinated files and generic directories objects.
     /// </summary>
-    public class FileTree
+    public class FileTree<TDir> where TDir : IDirectory<TDir>
     {
         // The root directory.
-        private IO.DirectoryInfo startDirectory;
+        protected TDir startDirectory;
         // The current layer of main FileTree object.
-        private int layer;
+        protected int layer;
         // List of child roots.
-        private List<FileTree> subTrees;
+        protected List<FileTree<TDir>> subTrees;
 
         /// <summary>
         /// Retruns and sets the RootDirectory of the fileTree object,
         /// but to set the value may causes problems, because the object is not reinitialized.
         /// </summary>
-        public IO.DirectoryInfo RootDirectory
+        public TDir RootDirectory
         {
             get
             {
@@ -48,10 +48,10 @@ namespace FileManageAndBackupBot
         /// Creates a new file tree object using custom root driectory object.
         /// </summary>
         /// <param name="startDirectory">The managing directory object of root directory.</param>
-        public FileTree(IO.DirectoryInfo startDirectory)
+        public FileTree(TDir startDirectory)
         {
             this.startDirectory = startDirectory;
-            subTrees = new List<FileTree>();
+            subTrees = new List<FileTree<TDir>>();
             layer = 0;
 
             Initialize();
@@ -63,8 +63,8 @@ namespace FileManageAndBackupBot
         /// <param name="path">The path of custom root directory in file system.</param>
         public FileTree(string path)
         {
-            startDirectory = (IO.DirectoryInfo)Activator.CreateInstance(typeof(IO.DirectoryInfo), path);
-            subTrees = new List<FileTree>();
+            startDirectory = (TDir)Activator.CreateInstance(typeof(TDir), path);
+            subTrees = new List<FileTree<TDir>>();
             layer = 0;
 
             Initialize();
@@ -75,10 +75,10 @@ namespace FileManageAndBackupBot
         /// </summary>
         /// <param name="startDirectory">The path of directory in file system.</param>
         /// <param name="layer">The layer since custom root directory.</param>
-        private FileTree(IO.DirectoryInfo startDirectory, int layer)
+        protected FileTree(TDir startDirectory, int layer)
         {
             this.startDirectory = startDirectory;
-            subTrees = new List<FileTree>();
+            subTrees = new List<FileTree<TDir>>();
             this.layer = layer;
 
             Initialize();
@@ -87,33 +87,33 @@ namespace FileManageAndBackupBot
         /// <summary>
         /// Initializes the current FileTree object recursively.
         /// </summary>
-        private void Initialize()
+        protected void Initialize()
         {
             foreach(var directory in startDirectory.GetDirectories())
             {
-                subTrees.Add(new FileTree(directory, layer + 1));
+                subTrees.Add(new FileTree<TDir>(directory, layer + 1));
             }
         }
 
-        public FileTree[] GetSubFileTrees() => subTrees.ToArray();
+        public FileTree<TDir>[] GetSubFileTrees() => subTrees.ToArray();
 
         /// <summary>
         /// Returns all child elements of the current layer.
         /// </summary>
         /// <returns>Returns FileSystemInfo object array.</returns>
-        public IO.FileSystemInfo[] GetChildren() => startDirectory.GetFileSystemInfos();
+        public IO.FileSystemInfo[] GetFileSystemInfos() => startDirectory.GetFileSystemInfos();
 
         /// <summary>
         /// Returns all directory elements of the current layer.
         /// </summary>
         /// <returns>Returns DirectoyInfo object array.</returns>
-        public IO.DirectoryInfo[] GetSubDirectories() => startDirectory.GetDirectories();
+        public TDir[] GetDirectories() => startDirectory.GetDirectories();
 
         /// <summary>
         /// Returns all file elements of the current layer.
         /// </summary>
         /// <returns>Returns FileInfo object array.</returns>
-        public IO.FileInfo[] GetSubFiles() => startDirectory.GetFiles();
+        public IO.FileInfo[] GetFiles() => startDirectory.GetFiles();
 
         /// <summary>
         /// Searches recursively for all files and directories with the given name.
@@ -123,7 +123,7 @@ namespace FileManageAndBackupBot
         public IEnumerable<IO.FileSystemInfo> SearchChildByName(string fileName)
         {
             // List with elements for the search.
-            List<IO.FileSystemInfo> children = new List<IO.FileSystemInfo>(GetChildren());
+            List<IO.FileSystemInfo> children = new List<IO.FileSystemInfo>(GetFileSystemInfos());
             // List with found elements.
             List<IO.FileSystemInfo> foundElements = new List<IO.FileSystemInfo>();
             // The compare item.
@@ -157,10 +157,53 @@ namespace FileManageAndBackupBot
         /// </summary>
         /// <param name="preTabs">Number of prewritten tabs.</param>
         /// <param name="text">Text to write in the output console.</param>
-        private void PrintLine(int preTabs, string text)
+        protected void PrintLine(int preTabs, string text)
         {
             string tabs = String.Concat(System.Linq.Enumerable.Repeat("  ", preTabs));
             Console.WriteLine(tabs + text);
+        }
+    }
+
+    public class FileTree : FileTree<LocalDirectory>
+    {
+        /// <summary>
+        /// Creates a new file tree object using custom root driectory object.
+        /// </summary>
+        /// <param name="startDirectory">The managing directory object of root directory.</param>
+        public FileTree(LocalDirectory startDirectory) : base(startDirectory)
+        {
+            this.startDirectory = startDirectory;
+            subTrees = new List<FileTree<LocalDirectory>>();
+            layer = 0;
+
+            Initialize();
+        }
+
+        /// <summary>
+        /// Creates a new file tree object using custom root directory path string.
+        /// </summary>
+        /// <param name="path">The path of custom root directory in file system.</param>
+        public FileTree(string path) : base(path)
+        {
+            startDirectory = (LocalDirectory)Activator.CreateInstance(typeof(LocalDirectory), path);
+            subTrees = new List<FileTree<LocalDirectory>>();
+            layer = 0;
+
+            Initialize();
+        }
+
+        /// <summary>
+        /// Creats a new file tree object with given path string and layer since custom root directory.
+        /// </summary>
+        /// <param name="startDirectory">The path of directory in file system.</param>
+        /// <param name="layer">The layer since custom root directory.</param>
+        private FileTree(LocalDirectory startDirectory, int layer) :base(startDirectory, layer)
+        {
+            this.startDirectory = startDirectory;
+            subTrees = new List<FileTree<LocalDirectory>>();
+            this.layer = layer;
+
+            Initialize();
         }
     }
 }

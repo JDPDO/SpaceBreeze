@@ -6,10 +6,9 @@ using IO = System.IO;
 
 namespace FileManageAndBackupBot
 {
-    public class LocalDirectory : Directory, IFileSystemItem
+    public class LocalDirectory : IDirectory<LocalDirectory>
     {
         // private fields
-        private Uri uri;
         private IO.DirectoryInfo directoryInfo;
 
         /// <summary>
@@ -18,7 +17,6 @@ namespace FileManageAndBackupBot
         /// <param name="path">Path of the directory location.</param>
         public LocalDirectory(string path)
         {
-                uri = new Uri(path);
                 directoryInfo = new IO.DirectoryInfo(path);
                 if (!Exists) IO.Directory.CreateDirectory(path);
         }
@@ -33,23 +31,30 @@ namespace FileManageAndBackupBot
             if (!Exists) IO.Directory.CreateDirectory(uri.AbsolutePath);
         }
 
+        public LocalDirectory(IO.DirectoryInfo directoryInfo)
+        {
+            this.directoryInfo = directoryInfo;
+        }
+
         /// <summary>
         /// Returns true if directory physically exists.
         /// </summary>
-        public override bool Exists => directoryInfo.Exists;
+        public bool Exists => directoryInfo.Exists;
 
         /// <summary>
-        /// Returns name of directory.
+        /// Returns and sets name of current directory.
         /// </summary>
-        public override string Name => directoryInfo.Name;
+        string IDirectory<LocalDirectory>.Name { get => directoryInfo.Name; }
 
-#region IFileSystemItem implementation
+        public string FullName => throw new NotImplementedException();
+
+        #region IDirectory implementation
 
         /// <summary>
         /// Returns uri of managed directory.
         /// </summary>
         /// <returns>Uri object.</returns>
-        public Uri GetUri() => Uri;
+        public Uri GetUri() => new Uri(directoryInfo.FullName);
 
         /// <summary>
         /// Returns true.
@@ -60,7 +65,7 @@ namespace FileManageAndBackupBot
         /// <summary>
         /// Deletes directory recursivly.
         /// </summary>
-        public override void Delete()
+        public void Delete()
         {
             try
             {
@@ -79,7 +84,8 @@ namespace FileManageAndBackupBot
         {
             try
             {
-                IO.Directory.Move(uri.AbsolutePath, destPath);
+                IO.Directory.Move(directoryInfo.FullName, destPath);
+                directoryInfo.Refresh();
             }
             catch (Exception e)
             {
@@ -87,7 +93,32 @@ namespace FileManageAndBackupBot
             }
         }
 
-#endregion
+        /// <summary>
+        /// Retruns all children of the directory object managed folder.
+        /// </summary>
+        /// <returns>Array of FileSystemInfo objects.</returns>
+        public IO.FileSystemInfo[] GetFileSystemInfos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public LocalDirectory[] GetDirectories()
+        {
+            IO.DirectoryInfo[] directories = directoryInfo.GetDirectories();
+            List<LocalDirectory> localDirectories = new List<LocalDirectory>();
+            foreach(var directory in directories)
+            {
+                localDirectories.Add(new LocalDirectory(directory));
+            }
+            return localDirectories.ToArray();
+        }
+
+        public IO.FileInfo[] GetFiles()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         /// <summary>
         /// Retruns the names of the sub files and folders.
@@ -95,19 +126,15 @@ namespace FileManageAndBackupBot
         /// <returns>Array of strings with one name per field.</returns>
         public string[] GetChildrenNames()
         {
-            var children = GetChildren();
+            var children = GetFileSystemInfos();
             List<string> output = new List<string>();
             foreach (var child in children) output.Add(child.Name);
             return output.ToArray();
         }
-        
-        /// <summary>
-        /// Retruns all children of the directory object managed folder.
-        /// </summary>
-        /// <returns>Array of FileSystemInfo objects.</returns>
-        public IO.FileSystemInfo[] GetChildren()
+
+        bool IFileSystemItem.Exists()
         {
-            return directoryInfo.GetFileSystemInfos();
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,9 +5,12 @@ using IO = System.IO;
 
 namespace FileManageAndBackupBot
 {
-    public interface IDirectory : IFileSystemItem
+    public interface IDirectory<TDir> : IFileSystemItem
     {
         string[] GetChildrenNames();
-        IO.FileSystemInfo[] GetChildren();
+        IO.FileSystemInfo[] GetFileSystemInfos();
+        TDir[] GetDirectories();
+        IO.FileInfo[] GetFiles();
+        string Name { get; }
     }
 }
