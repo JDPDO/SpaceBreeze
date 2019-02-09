@@ -1,9 +1,9 @@
 # FileManageAndBackupBot
 ## Features in work
 - Manage local files and directories: copy, paste, move, change attributes, return folder content, ...
+- Establish FTP connection and manage remote files: Upload, Download, change file access, ...
 
 ## Coming Features
-- Establish FTP connection and manage remote files: Upload, Download, change file access, ...
 - **Automatically manage, backup and deploy files to optimize the users workflow that he/she is able to focus on him/her tasks and only on them.**
 
 ## Namespaces
