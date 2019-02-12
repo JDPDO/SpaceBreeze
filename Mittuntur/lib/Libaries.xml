@@ -5,10 +5,5 @@
         Author="robinrodricks"
         Origin="https://github.com/robinrodricks/FluentFTP.git"
         Path="robinrodricks.FluentFTP" />
-
-  <Libary Name="xUnit"
-          Author="xunit"
-          Origin="https://github.com/xunit/xunit.git"
-          Path="xunit.xUnit" />
 </Libaries>
 
