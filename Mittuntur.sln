@@ -5,13 +5,6 @@ VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDPDO.Mittuntur", "Mittuntur\JDPDO.Mittuntur.csproj", "{1338641B-D2EE-43CF-B6F9-ECAD71F5C54F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDPDO.Mittuntur.UI", "Mittuntur.UI\JDPDO.Mittuntur.UI.csproj", "{C1BAEE61-02FF-46D3-AE50-23A0B9E1EFE8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "Mittuntur.TestConsole\TestConsole.csproj", "{F9EEB525-53AC-48AB-B7C8-DF1BED854B32}"
-	ProjectSection(ProjectDependencies) = postProject
-		{1338641B-D2EE-43CF-B6F9-ECAD71F5C54F} = {1338641B-D2EE-43CF-B6F9-ECAD71F5C54F}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,14 +15,6 @@ Global
 		{1338641B-D2EE-43CF-B6F9-ECAD71F5C54F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1338641B-D2EE-43CF-B6F9-ECAD71F5C54F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1338641B-D2EE-43CF-B6F9-ECAD71F5C54F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1BAEE61-02FF-46D3-AE50-23A0B9E1EFE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1BAEE61-02FF-46D3-AE50-23A0B9E1EFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1BAEE61-02FF-46D3-AE50-23A0B9E1EFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1BAEE61-02FF-46D3-AE50-23A0B9E1EFE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9EEB525-53AC-48AB-B7C8-DF1BED854B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9EEB525-53AC-48AB-B7C8-DF1BED854B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9EEB525-53AC-48AB-B7C8-DF1BED854B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9EEB525-53AC-48AB-B7C8-DF1BED854B32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
