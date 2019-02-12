@@ -1,4 +1,4 @@
-# FileManageAndBackupBot
+# Mittuntur - Backup Manager: the easy one
 ## Features in work
 - Manage local files and directories: copy, paste, move, change attributes, return folder content, ...
 
