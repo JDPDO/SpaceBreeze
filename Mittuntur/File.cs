@@ -65,7 +65,7 @@ namespace JDPDO.Mittuntur
         public virtual string Name
         {
             get => fileInfo.Name;
-            set => throw new NotImplementedException();
+            set => Name = value;
         }
 
         /// <summary>
