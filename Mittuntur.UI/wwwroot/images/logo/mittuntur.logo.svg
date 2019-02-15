@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1152 1152" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g transform="matrix(0.96,0,0,0.96,0,0)">
+        <rect id="ArtBoard1" x="0" y="0" width="1200" height="1200" style="fill:none;"/>
+        <g id="ArtBoard11" serif:id="ArtBoard1">
+            <g transform="matrix(0.833333,0,0,0.833333,100,100)">
+                <circle cx="600" cy="600" r="600" style="fill:white;"/>
+                <clipPath id="_clip1">
+                    <circle cx="600" cy="600" r="600"/>
+                </clipPath>
+                <g clip-path="url(#_clip1)">
+                    <g transform="matrix(2.62546,0,0,5.17612,1071.58,-2580.88)">
+                        <ellipse cx="-184.356" cy="701.392" rx="141.232" ry="90.521" style="fill:rgb(0,163,255);"/>
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(-1.30937,0.350843,-0.350843,-1.30937,901.955,1179.1)">
+                <path d="M314.005,664.426C314.005,538.526 211.942,436.463 86.042,436.463C-39.858,436.463 -141.92,538.526 -141.92,664.426L314.005,664.426Z" style="fill:rgb(0,163,255);"/>
+            </g>
+            <g transform="matrix(1.44798,0,0,1.38362,-1397.5,-917.087)">
+                <ellipse cx="1145.28" cy="966.321" rx="81.517" ry="85.308" style="fill:rgb(0,163,255);"/>
+            </g>
+            <g transform="matrix(1.44798,0,0,1.38362,-811.009,-1091.85)">
+                <ellipse cx="1145.28" cy="966.321" rx="81.517" ry="85.308" style="fill:rgb(0,163,255);"/>
+            </g>
+            <g transform="matrix(0.320881,0,0,0.303109,1000.88,46.9123)">
+                <ellipse cx="-478.525" cy="654.088" rx="227.34" ry="240.669" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.320881,0,0,0.303109,414.391,221.675)">
+                <ellipse cx="-478.525" cy="654.088" rx="227.34" ry="240.669" style="fill:white;"/>
+            </g>
+            <g transform="matrix(-0.258823,-0.965939,0.585555,-0.156899,73.747,133.893)">
+                <path d="M-474.575,492.884C-514.836,492.884 -547.524,580.141 -547.524,687.618C-547.524,795.095 -514.836,882.352 -474.575,882.352C-464.509,833.669 -456.338,763.171 -456.338,687.618C-456.338,612.065 -464.509,541.568 -474.575,492.884Z" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.110069,0,0,0.145906,414.424,232.639)">
+                <ellipse cx="-1423.87" cy="1283.67" rx="409.605" ry="309" style="fill:rgb(0,163,255);"/>
+            </g>
+            <g transform="matrix(0.110069,0,0,0.145906,1004.06,57.8762)">
+                <ellipse cx="-1423.87" cy="1283.67" rx="409.605" ry="309" style="fill:rgb(0,163,255);"/>
+            </g>
+        </g>
+    </g>
+</svg>
