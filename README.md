@@ -6,6 +6,7 @@
 
 ## Coming Features
 - **Automatically manage, backup and deploy files to optimize the users workflow that he/she is able to focus on him/her tasks and only on them.**
+- Encrypt files and folders
 
 ## Namespaces
 
