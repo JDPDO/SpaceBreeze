@@ -5,17 +5,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using JDPDO.Mittuntur.UI.Models;
-using Mittuntur;
+using M = JDPDO.Mittuntur;
 
 namespace Mittuntur.UI.Controllers
 {
     public class HomeController : Controller
     {
         readonly string startPage = "Folder";
+        const string rootDirectory = @"C:\";
 
         public IActionResult Index()
         {
-            return View(startPage);
+            // Configure site attributes
+            ViewData["Title"] = startPage;
+
+            // Setting tree of rootDirectory up.
+            M.FileTree<M.LocalDirectory> tree = new M.FileTree<M.LocalDirectory>(rootDirectory);
+
+            // Hand over start page name and tree object for data visualisation.
+            return View(startPage, tree);
         }
 
         public IActionResult About()
@@ -32,9 +40,21 @@ namespace Mittuntur.UI.Controllers
             return View();
         }
 
-        public IActionResult Folder()
+        public IActionResult Folder(string path = rootDirectory)
         {
-            return View();
+            // Setting tree of rootDirectory up.
+            M.FileTree<M.LocalDirectory> tree = new M.FileTree<M.LocalDirectory>(path);
+
+            // Initialize possible events
+            foreach (var directory in tree.GetSubDirectories())
+            {
+                object nextTree() => Folder(directory.Name);
+                //Action<IActionResult> nextTree = new Action((result) => Folder(directory.GetUri().AbsolutePath));
+                Ipc.On(directory.Name, new Action( () => nextTree() ));
+            }
+
+            // Hand over start page name and tree object for data visualisation.
+            return View(tree);
         }
 
         public IActionResult Error()

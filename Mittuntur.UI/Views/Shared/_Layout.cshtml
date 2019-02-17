@@ -41,8 +41,8 @@
                          style="height: 4em;" />
                 </div>
                 <ul class="uk-iconnav uk-navbar-nav">
-                    <li><a href="" uk-icon="icon: history; ratio: 2"></a></li>
-                    <li><a href="#" uk-icon="icon: folder; ratio: 2"></a></li>
+                    <li><a asp-action="" uk-icon="icon: history; ratio: 2"></a></li>
+                    <li><a asp-action="Folder" uk-icon="icon: folder; ratio: 2"></a></li>
                     <li><a href="#" uk-icon="icon: list; ratio: 2"></a></li>
                 </ul>
             </div>
@@ -54,7 +54,5 @@
          style="margin-left: 6em; margin-top: 6em; margin-right: 0.5em; position: absolute; width: calc(100% - 6.5em)">
         @RenderBody()
     </div>
-
-    @RenderSection("Scripts", required: false)
 </body>
 </html>

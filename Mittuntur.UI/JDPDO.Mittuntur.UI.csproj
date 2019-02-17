@@ -3,6 +3,12 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Views\Folder\**" />
+    <Content Remove="Views\Folder\**" />
+    <EmbeddedResource Remove="Views\Folder\**" />
+    <None Remove="Views\Folder\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="ElectronNET.API" Version="0.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.2" />
@@ -17,8 +23,5 @@
     <Content Update="electron.manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Folder\" />
   </ItemGroup>
 </Project>

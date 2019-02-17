@@ -1,36 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Folder";
-}
+﻿@using JDPDO.Mittuntur;
+@using JDPDO.Mittuntur.UI.Models;
+@model FileTree<LocalDirectory>
 
-@*<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>*@
-
-<ul class="uk-list uk-list-striped">
-    <li>List item 1</li>
-    <li>List item 2</li>
-    <li>List item 3</li>
-    <li>List item 1</li>
-    <li>List item 2</li>
-    <li>List item 3</li>
-    <li>List item 1</li>
-    <li>List item 2</li>
-    <li>List item 3</li>
-    <li>List item 1</li>
-    <li>List item 2</li>
-    <li>List item 3</li>
-    <li>List item 1</li>
-    <li>List item 2</li>
-    <li>List item 3</li>
-    <li>List item 1</li>
-    <li>List item 2</li>
-    <li>List item 3</li>
-    <li>List item 1</li>
-    <li>List item 2</li>
-    <li>List item 3</li>
-    <li>List item 1</li>
-    <li>List item 2</li>
-    <li>List item 3</li>
-    <li>List item 1</li>
-    <li>List item 2</li>
-    <li>List item 3</li>
-</ul>
+<div class="uk-card uk-card-default uk-card-body">
+    <ul class="uk-list">
+        @foreach (var item in Model.GetChildren())
+        {
+        <li>
+            <a id="@item.Name" >@item.Name</a>
+        </li>
+        }
+    </ul>
+</div>
