@@ -14,9 +14,9 @@ namespace JDPDO.Mittuntur.UI.Models
         //public DirectoryView()
         //{
         //    localTrees = new List<FileTree<Directory>>();
-        //    foreach(var drive in Environment.GetLogicalDrives())
+        //    foreach (var drive in Environment.GetLogicalDrives())
         //    {
-        //        localTrees.Add(new FileTree<Directory>( new LocalDirectory(drive) ));
+        //        localTrees.Add(new FileTree<Directory>(new LocalDirectory(drive)));
         //    }
         //}
 

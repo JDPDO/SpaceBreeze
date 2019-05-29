@@ -50,7 +50,7 @@ namespace JDPDO.Mittuntur.UI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Folder}/{id?}");
+                    template: "{controller=Directory}/{action=Index}/{id?}");
             });
 
             BootstrapElectron();

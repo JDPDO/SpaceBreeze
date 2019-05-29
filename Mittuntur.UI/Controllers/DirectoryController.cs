@@ -20,12 +20,13 @@ namespace JDPDO.Mittuntur.UI.Controllers
 
         private IConfiguration _configuration;
 
-        public IActionResult Index()
-        {
-            string path = _configuration["localhost:path"];
-            if (path == String.Empty) _configuration["localhost:path"] = IO.Directory.GetDirectoryRoot(IO.Directory.GetCurrentDirectory());
-            return Index(path);
-        }
+        //// If configuration is enabled
+        //public IActionResult Index()
+        //{
+        //    string path = _configuration["localhost:path"];
+        //    if (path == String.Empty) _configuration["localhost:path"] = IO.Directory.GetDirectoryRoot(IO.Directory.GetCurrentDirectory());
+        //    return Index(path);
+        //}
 
         public IActionResult Index(string path = @"D:\Downloads")
         {
