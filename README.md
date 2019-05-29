@@ -1,4 +1,4 @@
-# Mittuntur - Backup Manager: the easy one+
+# Mittuntur - Backup Manager: the easy one
 ## Execution via electron
   Starting app for testing purposes: navigate in folder Mittuntur.UI an run in console
   '''
