@@ -40,22 +40,34 @@ namespace Mittuntur.UI.Controllers
             return View();
         }
 
-        public IActionResult Folder(string path = rootDirectory)
+        [HttpGet("{path}")]
+        public IActionResult Folder(string path)
         {
-            // Setting tree of rootDirectory up.
+            // Configure site attributes
+            ViewData["Title"] = "Folder";
+
+            // Setting file tree up
             M.FileTree<M.LocalDirectory> tree = new M.FileTree<M.LocalDirectory>(path);
 
-            // Initialize possible events
-            foreach (var directory in tree.GetSubDirectories())
-            {
-                object nextTree() => Folder(directory.Name);
-                //Action<IActionResult> nextTree = new Action((result) => Folder(directory.GetUri().AbsolutePath));
-                Ipc.On(directory.Name, new Action( () => nextTree() ));
-            }
-
-            // Hand over start page name and tree object for data visualisation.
             return View(tree);
         }
+
+        //public IActionResult Folder(string path = rootDirectory)
+        //{
+        //    // Setting tree of rootDirectory up.
+        //    M.FileTree<M.LocalDirectory> tree = new M.FileTree<M.LocalDirectory>(path);
+
+        //    // Initialize possible events
+        //    foreach (var directory in tree.GetSubDirectories())
+        //    {
+        //        object nextTree() => Folder(directory.Name);
+        //        //Action<IActionResult> nextTree = new Action((result) => Folder(directory.GetUri().AbsolutePath));
+        //        Ipc.On(directory.Name, new Action( () => nextTree() ));
+        //    }
+
+        //    // Hand over start page name and tree object for data visualisation.
+        //    return View(tree);
+        //}
 
         public IActionResult Error()
         {

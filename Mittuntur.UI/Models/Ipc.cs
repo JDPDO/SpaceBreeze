@@ -77,13 +77,12 @@ namespace JDPDO.Mittuntur.UI.Models
         /// <param name="channel">Channel to listen and write on.</param>
         /// <param name="window">Reciver window of message. If null the mainWindow is used.</param>
         /// <param name="data">To sending data.</param>
-        public static void On(string channel, BrowserWindow window = null, params object[] data)
+        public static void On(string channel, string responseChannel, BrowserWindow window = null, params object[] data)
         {
-            Electron.IpcMain.On(channel, (args) =>
+            Electron.IpcMain.On(channel, (arg) =>
             {
                 if (window == null) window = Electron.WindowManager.BrowserWindows.First();
-                Action action = new Action(() => Electron.IpcMain.Send(window, channel, data));
-                On(channel, action);
+                Electron.IpcMain.Send(window, responseChannel, data);
             });
         }
 
@@ -139,7 +138,8 @@ namespace JDPDO.Mittuntur.UI.Models
         /// <param name="trigger"></param>
         /// <param name="data"></param>
         public static void AddChannel(
-            string channel, 
+            string channel,
+            string responseChannel,
             string triggerElementId, 
             string triggerMessage, 
             string elementId = null, 
@@ -153,7 +153,7 @@ namespace JDPDO.Mittuntur.UI.Models
 
             // Add event Ipc fuctionality to main process for defined request.
             if (window == null) window = Electron.WindowManager.BrowserWindows.First();
-            On(channel, window, data);
+            On(channel, responseChannel, window, data);
         }
     }
 }

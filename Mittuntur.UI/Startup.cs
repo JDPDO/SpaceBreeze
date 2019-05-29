@@ -16,7 +16,7 @@ namespace JDPDO.Mittuntur.UI
     public class Startup
     {
         // Adding localisation field
-        readonly IStringLocalizer localizer;
+        // readonly IStringLocalizer localizer;
 
         public Startup(IConfiguration configuration)
         {

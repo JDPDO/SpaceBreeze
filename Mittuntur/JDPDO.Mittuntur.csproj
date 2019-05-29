@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentFTP" Version="21.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.2" />
   </ItemGroup>
 
 </Project>

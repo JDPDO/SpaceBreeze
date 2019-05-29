@@ -7,7 +7,7 @@
         @foreach (var item in Model.GetChildren())
         {
         <li>
-            <a id="@item.Name" >@item.Name</a>
+            <a id="@item.Name" href="@Url.Action("Folder", "Home", item.Name)">@item.Name</a>
         </li>
         }
     </ul>
