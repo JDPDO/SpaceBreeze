@@ -1,4 +1,10 @@
-# Mittuntur - Backup Manager: the easy one
+# Mittuntur - Backup Manager: the easy one+
+## Execution via electron
+  Starting app for testing purposes: navigate in folder Mittuntur.UI an run in console
+  '''
+  electronize start
+  ''' 
+
 ## Features in work
 - Manage local files and directories: copy, paste, move, change attributes, return folder content, ...
 - Establish FTP connection and manage remote files: Upload, Download, change file access, ...
