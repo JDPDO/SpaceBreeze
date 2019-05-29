@@ -17,5 +17,11 @@ namespace JDPDO.Mittuntur.UI.Controllers
         {
             return null;
         }
+
+        public IEnumerable<IFileSystemItem> GetDirectoryContent(string uri)
+        {
+            FileTree<LocalDirectory> fileTree = new FileTree<LocalDirectory>(uri);
+            return fileTree.GetChildren();
+        }
     }
 }

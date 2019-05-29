@@ -9,6 +9,17 @@ namespace JDPDO.Mittuntur.UI.Models
 {
     public class DirectoryView
     {
+        //List<FileTree<Directory>> localTrees;
+
+        //public DirectoryView()
+        //{
+        //    localTrees = new List<FileTree<Directory>>();
+        //    foreach(var drive in Environment.GetLogicalDrives())
+        //    {
+        //        localTrees.Add(new FileTree<Directory>( new LocalDirectory(drive) ));
+        //    }
+        //}
+
         public static IHtmlContentBuilder GetHtmlListItems(FileTree<LocalDirectory> tree)
         {
             IHtmlContentBuilder builder = new HtmlContentBuilder();

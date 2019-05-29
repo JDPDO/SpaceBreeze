@@ -6,11 +6,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using IO = System.IO;
 
 namespace JDPDO.Mittuntur.UI.Controllers
 {
     public class DirectoryController : Controller
     {
+        public DirectoryController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        private IConfiguration _configuration;
+
+        public IActionResult Index()
+        {
+            string path = _configuration["localhost:path"];
+            if (path == String.Empty) _configuration["localhost:path"] = IO.Directory.GetDirectoryRoot(IO.Directory.GetCurrentDirectory());
+            return Index(path);
+        }
+
         public IActionResult Index(string path = @"D:\Downloads")
         {
             FileTree<LocalDirectory> tree = new FileTree<LocalDirectory>(path);
