@@ -13,7 +13,7 @@ namespace JDPDO.Mittuntur.UI.Controllers
     public class RequestController : ControllerBase
     {
         [HttpGet("{uri}")]
-        public IActionResult GetDirectoryContent(string uri)
+        public IActionResult GetDirectoryContentIActionResult(string uri)
         {
             return null;
         }
