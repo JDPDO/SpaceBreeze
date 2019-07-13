@@ -6,6 +6,25 @@ namespace JDPDO.Mittuntur
 {
     class InstanceRegister
     {
+        #region staticVariablesAndMethods
+
+        /// <summary>
+        /// Stores the first created InstanceRegister object.
+        /// </summary>
+        private static InstanceRegister firstInstanceRegister;
+
+        /// <summary>
+        /// Returns the first created 'InstanceRegister' object or creates one, if none was declared before.
+        /// </summary>
+        /// <returns>First created InstanceRegister object in runtime.</returns>
+        public static InstanceRegister GetFirstInstanceRegister()
+        {
+            if (firstInstanceRegister == null) firstInstanceRegister = new InstanceRegister();
+            return firstInstanceRegister;
+        }
+
+        #endregion
+
         /// <summary>
         /// Containing register for various types that are holding instances of that classes. 
         /// </summary>
@@ -13,8 +32,11 @@ namespace JDPDO.Mittuntur
 
         private InstanceRegister(IEnumerable<KeyValuePair<InstanceType, Dictionary<string, object>>> collection)
         {
+            // Init register.
             registers = new Dictionary<InstanceType, Dictionary<string, object>>(collection);
-            
+
+            // Declare first InstanceRegister to Type.
+            if (firstInstanceRegister == null) firstInstanceRegister = this;
         }
 
         public InstanceRegister() : this(null) { }
@@ -53,7 +75,7 @@ namespace JDPDO.Mittuntur
         /// <returns>The instance to given id.</returns>
         internal object ProvideInstance(InstanceType type, string id)
         {
-            if (type != InstanceType.Unknown && id != null)
+            if (type != InstanceType.Unknown && String.IsNullOrEmpty(id))
             {
                 return registers[type][id];
             }
