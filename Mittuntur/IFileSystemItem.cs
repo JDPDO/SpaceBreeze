@@ -13,8 +13,12 @@ namespace JDPDO.Mittuntur
         // Attributes of elment.
         FileAttributes Attributes { get; set; }
 
-        // Access and write times.
+        // FileInfo obejct
+        FileInfo FileInfo { get; }
+
+        // Access, create and write times.
         DateTime LastAccess { get; set; }
+        DateTime Created { get; set; }
         DateTime LastWrite { get; set; }
 
         // Name of element without path, but with ending.
