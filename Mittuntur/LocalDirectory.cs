@@ -9,7 +9,7 @@ namespace JDPDO.Mittuntur
 {
     public class LocalDirectory : Directory
     {
-        IO.DirectoryInfo directoryInfo;
+        private IO.DirectoryInfo directoryInfo;
 
         /// <summary>
         /// Sets up directory object with defined path. Create Directory if location is not avaiable.
@@ -23,7 +23,7 @@ namespace JDPDO.Mittuntur
             }
             catch (Exception e)
             {
-                ExeptionHandler.NewException(e);
+                ExceptionHandler.LogException(e);
             }
         }
 
@@ -39,7 +39,7 @@ namespace JDPDO.Mittuntur
             }
             catch (Exception e)
             {
-                ExeptionHandler.NewException(e);
+                ExceptionHandler.LogException(e);
             }
         }
 

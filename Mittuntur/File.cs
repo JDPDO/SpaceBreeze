@@ -10,6 +10,8 @@ namespace JDPDO.Mittuntur
         // private fields
         private IO.FileInfo fileInfo;
 
+        public IO.FileInfo FileInfo { get; }
+
         /// <summary>
         /// Creates new File object with predefined uri string.
         /// </summary>
@@ -67,6 +69,11 @@ namespace JDPDO.Mittuntur
             get => fileInfo.Name;
             set => Name = value;
         }
+
+        /// <summary>
+        /// Provides creation time.
+        /// </summary>
+        public DateTime Created { get => fileInfo.CreationTime; set => fileInfo.CreationTime = value; }
 
         /// <summary>
         /// Deletes the pysical representaiton of the file.

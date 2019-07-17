@@ -1,6 +1,12 @@
 # Mittuntur - Backup Manager: the easy one
 ![alt text](https://raw.githubusercontent.com/JDPDO/mittuntur/e_pictures/pic_overview.jpg)
 
+=======
+## Execution via electron
+  Starting app for testing purposes: navigate in folder Mittuntur.UI an run in console
+  '''
+  electronize start
+  ''' 
 
 ## Features in work
 - Manage local files and directories: copy, paste, move, change attributes, return folder content, ...

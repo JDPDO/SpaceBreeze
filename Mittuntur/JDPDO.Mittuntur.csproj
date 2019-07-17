@@ -11,13 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="lib\**" />
-    <EmbeddedResource Remove="lib\**" />
-    <None Remove="lib\**" />
+    <None Include="lib\FluentFTP\FluentFTP.Examples\Examples.csproj" />
+    <None Include="lib\FluentFTP\FluentFTP.sln" />
+    <None Include="lib\FluentFTP\FluentFTP.Tests\Tests.csproj" />
+    <None Include="lib\FluentFTP\FluentFTP\FluentFTP.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentFTP" Version="21.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.2" />
   </ItemGroup>
 
 </Project>

@@ -110,9 +110,23 @@ namespace JDPDO.Mittuntur
         /// <returns>Returns true.</returns>
         public bool IsDirectory() => true;
 
+        /// <summary>
+        /// Returns FileInfo. Not implemented yet!
+        /// </summary>
+        public IO.FileInfo FileInfo { get => throw new NotImplementedException(); }
+
+        /// <summary>
+        /// Provides the creation time of the managed directory.
+        /// </summary>
+        public abstract DateTime Created { get; set; }
+
         // public abstract bool MoveTo(string path);
 
         #endregion
+
+        /* 
+         * Methods for direct directory management and listing.
+         */
 
         /// <summary>
         /// Deletes the pysical representaiton of the Directory.
@@ -156,5 +170,35 @@ namespace JDPDO.Mittuntur
         /// </summary>
         /// <returns></returns>
         public abstract File[] GetFiles();
+
+        /*
+         * Methods for sub-directory and -file management.
+         */
+
+        ///// <summary>
+        ///// Deletes child if it is a file or an empty directory.
+        ///// </summary>
+        ///// <param name="child">To deleting child.</param>
+        ///// <returns>True if deletion successful.</returns>
+        //public abstract bool DeleteChild(IFileSystemItem child);
+
+        /// <summary>
+        /// Deletes child if it is a file or an empty directory and deletes directory if 'recusive' is ture.
+        /// </summary>
+        /// <param name="child">To deleting child.</param>
+        /// <param name="recusive">Determine if filled directory may deleted.</param>
+        /// <returns>True if deletion successful.</returns>
+        public abstract bool DeleteChild(IFileSystemItem child, bool recusive = false);
+
+        public abstract IO.MemoryStream GetFileStream(File child);
+
+        /// <summary>
+        /// Creates a child directory in managed directory.
+        /// </summary>
+        /// <param name="name">The name of the new Directory.</param>
+        /// <returns></returns>
+        public abstract bool CreateChildDirectory(string name);
+
+        //public abstract bool AddFile();
     }
 }

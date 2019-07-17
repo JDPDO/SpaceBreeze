@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Mittuntur.UI</title>
+
+    <!-- Uikit -->
+    <link rel="stylesheet" href="~/lib/uikit-3.0.3/css/uikit.css" />
+    <script src="~/lib/uikit-3.0.3/js/uikit.js"></script>
+    <script src="~/lib/uikit-3.0.3/js/uikit-icons.js"></script>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+    @*<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>*@   
+
+    @*<environment include="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/css/site.css" />
+
+            <!-- Uikit -->
+            <link rel="stylesheet" href="~/lib/uikit-3.0.3/css/uikit.css" />
+            <script src="~/lib/uikit-3.0.3/js/uikit.js"></script>
+            <script src="~/lib/uikit-3.0.3/js/uikit-icons.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        </environment>*@
+</head>
+<body class="unselectable" ondragstart="return false;">
+    <!-- Navigation element -->
+    <div class="uk-background-secondary" style="width:5em; height: 100%; position: fixed; z-index: 10;">
+        <!-- Site navigation -->
+        <div class="uk-background-secondary" style="width: 140vw; height: 5em;" uk-grid>
+            <div class="uk-navbar">
+                <div class="uk-navbar-item">
+                    <img src="~/images/logo/mittuntur.logo.svg"
+                         class=""
+                         style="height: 4em;" />
+                </div>
+                <ul class="uk-iconnav uk-navbar-nav">
+                    <li><a asp-action="" uk-icon="icon: history; ratio: 2"></a></li>
+                    <li><a asp-action="Folder" uk-icon="icon: folder; ratio: 2"></a></li>
+                    <li><a href="#" uk-icon="icon: list; ratio: 2"></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Left navigation -->
+    </div>
+    <!-- Content block -->
+    <div class="scrollbar uk-width-1-1" 
+         style="margin-left: 6em; margin-top: 6em; margin-right: 0.5em; padding-right: 2em; position: absolute; width: calc(100% - 6.5em)">
+        @RenderBody()
+    </div>
+</body>
+</html>

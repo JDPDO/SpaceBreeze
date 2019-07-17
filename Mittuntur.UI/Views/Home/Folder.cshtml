@@ -1,0 +1,14 @@
+﻿@using JDPDO.Mittuntur;
+@using JDPDO.Mittuntur.UI.Models;
+@model FileTree<LocalDirectory>
+
+<div class="uk-card uk-card-default uk-card-body">
+    <ul class="uk-list">
+        @foreach (var item in Model.GetChildren())
+        {
+        <li>
+            <a id="@item.Name" href="@Url.Action("Folder", "Home", item.Name)">@item.Name</a>
+        </li>
+        }
+    </ul>
+</div>

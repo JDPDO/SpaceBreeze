@@ -1,0 +1,3 @@
+[submodule "Mittuntur/lib/FluentFTP"]
+	path = Mittuntur/lib/FluentFTP
+	url = git@github.com:robinrodricks/FluentFTP.git
