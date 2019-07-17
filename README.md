@@ -25,6 +25,7 @@
   | Protocols | Contains implematation of required and optional Protocols, such as FTP. |
 
 ## Branchnames prefixes
+  | Purpose | Contraction |
   | --- | --- |
   | Feature adding branch | f_ | 
   | Problem solving branch | p_ | 
