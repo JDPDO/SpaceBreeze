@@ -23,7 +23,7 @@ namespace JDPDO.Mittuntur
             }
             catch (Exception e)
             {
-                ExeptionHandler.NewException(e);
+                ExceptionHandler.LogException(e);
             }
         }
 
@@ -39,7 +39,7 @@ namespace JDPDO.Mittuntur
             }
             catch (Exception e)
             {
-                ExeptionHandler.NewException(e);
+                ExceptionHandler.LogException(e);
             }
         }
 

@@ -98,7 +98,7 @@ namespace JDPDO.Mittuntur
             }
             catch (Exception e)
             {
-                ExeptionHandler.NewException(e);
+                ExceptionHandler.LogException(e);
             }
             subTrees.Sort();
         }

@@ -61,10 +61,10 @@ namespace JDPDO.Mittuntur
                 }
                 catch (Exception e)
                 {
-                    ExeptionHandler.NewException(e);
+                    ExceptionHandler.LogException(e);
                 }
             }
-            else ExeptionHandler.NewArgumentNullExeption(nameof(instance), "The Object have to be initialized.");
+            else ExceptionHandler.NewArgumentNullException(nameof(instance), "The Object have to be initialized.");
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace JDPDO.Mittuntur
                 return registers[type][id];
             }
             // If an argument equals null.
-            ExeptionHandler.NewException(new ArgumentNullException(nameof(id), "The id value have to be defined."));
+            ExceptionHandler.NewArgumentNullException(nameof(id), "The id value have to be defined.");
             return null;
         }
     }
