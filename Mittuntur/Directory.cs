@@ -190,6 +190,15 @@ namespace JDPDO.Mittuntur
         /// <returns>True if deletion successful.</returns>
         public abstract bool DeleteChild(IFileSystemItem child, bool recusive = false);
 
-        public abstract IO.FileStream GetFileStream(File child);
+        public abstract IO.MemoryStream GetFileStream(File child);
+
+        /// <summary>
+        /// Creates a child directory in managed directory.
+        /// </summary>
+        /// <param name="name">The name of the new Directory.</param>
+        /// <returns></returns>
+        public abstract bool CreateChildDirectory(string name);
+
+        //public abstract bool AddFile();
     }
 }
