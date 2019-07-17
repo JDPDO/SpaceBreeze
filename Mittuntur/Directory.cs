@@ -190,6 +190,6 @@ namespace JDPDO.Mittuntur
         /// <returns>True if deletion successful.</returns>
         public abstract bool DeleteChild(IFileSystemItem child, bool recusive = false);
 
-        public abstract IO.FileStream GetFile(File child);
+        public abstract IO.FileStream GetFileStream(File child);
     }
 }
