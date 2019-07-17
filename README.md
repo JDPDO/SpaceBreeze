@@ -1,7 +1,6 @@
 # Mittuntur - Backup Manager: the easy one
 ![alt text](https://raw.githubusercontent.com/JDPDO/mittuntur/e_pictures/pic_overview.jpg)
 
-=======
 ## Execution via electron
   Starting app for testing purposes: navigate in folder Mittuntur.UI an run in console
   '''
@@ -26,6 +25,7 @@
   | Protocols | Contains implematation of required and optional Protocols, such as FTP. |
 
 ## Branchnames prefixes
-  | Feature adding branch | f_ |  
-  | Problem solving branch | p_ |  
-  | Example branch | e_ |
+  | --- | --- |
+  | Feature adding branch | f_ | 
+  | Problem solving branch | p_ | 
+  | Example branch | e_ | 
