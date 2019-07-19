@@ -1,4 +1,4 @@
-# Mittuntur - Backup Manager: the easy one
+# SpaceBreeze - Backup and remote file manager: the easy one
 ![alt text](https://raw.githubusercontent.com/JDPDO/mittuntur/e_pictures/pic_overview.jpg)
 
 ## Execution via electron
