@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDPDO.SpaceBreeze", "SpaceBreeze\JDPDO.SpaceBreeze.csproj", "{FD86520A-121F-4A47-9D20-DA97CE67F8F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDPDO.SpaceBreeze.UI", "SpaceBreeze.UI\JDPDO.SpaceBreeze.UI.csproj", "{24031506-016E-4706-AED3-E8A789325496}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD86520A-121F-4A47-9D20-DA97CE67F8F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD86520A-121F-4A47-9D20-DA97CE67F8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD86520A-121F-4A47-9D20-DA97CE67F8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD86520A-121F-4A47-9D20-DA97CE67F8F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24031506-016E-4706-AED3-E8A789325496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24031506-016E-4706-AED3-E8A789325496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24031506-016E-4706-AED3-E8A789325496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24031506-016E-4706-AED3-E8A789325496}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7411EC86-BFC3-48D3-9E34-1F5ACAF53E5C}
+	EndGlobalSection
+EndGlobal

@@ -1,5 +1,5 @@
-# Mittuntur - Backup Manager: the easy one
-![alt text](https://raw.githubusercontent.com/JDPDO/mittuntur/e_pictures/pic_overview.jpg)
+# SpaceBreeze - Backup and remote file manager: the easy one
+![alt text](https://raw.githubusercontent.com/JDPDO/spacebreeze/e_pictures/pic_overview.jpg)
 
 ## Execution via electron
   Starting app for testing purposes: navigate in folder Mittuntur.UI an run in console
@@ -17,7 +17,7 @@
 - Encrypt files and folders
 
 ## Namespaces
-  | JDPDO.FMBB. | Description |
+  | JDPDO.SpaceBreeze. | Description |
   | --- | --- |
   | Core | Contains the FTP protocols and classes for local file transfer. In addition, the bot will be implemented here. |
   | CLI | Contains all parts for a console application. |
