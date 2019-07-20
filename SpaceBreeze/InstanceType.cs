@@ -7,7 +7,7 @@ namespace JDPDO.SpaceBreeze
     /// <summary>
     /// Specifies the used instance types of the JDPDO.SpaceBreeze assembly.
     /// </summary>
-    enum InstanceType
+    public enum InstanceType
     {
         Unknown = 0,
         File = 2^0,
