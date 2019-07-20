@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JDPDO.SpaceBreeze
 {
-    class InstanceRegister
+    public class InstanceRegister
     {
         #region staticVariablesAndMethods
 
