@@ -7,13 +7,14 @@ namespace JDPDO.SpaceBreeze
     /// <summary>
     /// Specifies the used instance types of the JDPDO.SpaceBreeze assembly.
     /// </summary>
+    [Flags]
     public enum InstanceType
     {
-        Unknown = 0,
-        File = 2^0,
-        Directory = 2^1,
-        LocalDirectory = 2^2,
-        FtpsDirectory = 2^3,
-        FtpsClient = 2^4,
+        Unknown = 0x00,
+        File = 0x01,
+        Directory = 0x02,
+        LocalDirectory = 0x03,
+        FtpsDirectory = 0x04,
+        FtpsClient = 0x05,
     }
 }
