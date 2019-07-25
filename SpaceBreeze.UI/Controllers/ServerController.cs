@@ -9,12 +9,12 @@ namespace JDPDO.SpaceBreeze.UI.Controllers
 {
     public class ServerController : Controller
     {
-        ServerModel model = new ServerModel();
+        private ServerModel model = new ServerModel();
 
         public IActionResult Index()
         {
             InstanceType clientTypes = InstanceType.FtpsClient;
-            Dictionary<string, object> managers = model.GetClientInstances(clientTypes);
+            Dictionary<string, object> managers = model.GetInstances(clientTypes);
             return View("Index", managers);
         }
 

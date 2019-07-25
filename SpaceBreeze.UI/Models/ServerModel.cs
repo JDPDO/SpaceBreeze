@@ -8,29 +8,34 @@ namespace JDPDO.SpaceBreeze.UI.Models
 {
     public class ServerModel
     {
-        InstanceRegister register;
+        /// <summary>
+        /// Contains the app's instance register.
+        /// </summary>
+        private InstanceRegister register;
 
+        /// <summary>
+        /// Creates a new 'ServerModel' instance.
+        /// </summary>
         public ServerModel()
         {
-            register = new InstanceRegister();
+            register = InstanceRegister.GetFirstInstanceRegister();
         }
 
         /// <summary>
         /// Creates a new client and saves it to the configuration. (No exception handling!)
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="title"></param>
-        /// <param name="host"></param>
-        /// <param name="port"></param>
-        /// <param name="user"></param>
-        /// <param name="password"></param>
+        /// <param name="type">Type of the new client instance.</param>
+        /// <param name="title">Unique title of the new client instance.</param>
+        /// <param name="host">Address of the remote server for the client instance.</param>
+        /// <param name="port">Port of the remote server for the client instance.</param>
+        /// <param name="user">User on the remote server for the client instance.</param>
+        /// <param name="password">Password of user on the remote server for the client instance.</param>
         /// <returns>True if client was created.</returns>
         public bool CreateClientInstance(InstanceType type, string title, string host, int port, string user, string password)
         {
             if (type != InstanceType.Unknown)
             {
                 IProtocolManager manager;
-
                 switch (type)
                 {
                     case InstanceType.FtpsClient:
@@ -46,20 +51,25 @@ namespace JDPDO.SpaceBreeze.UI.Models
         }
 
         /// <summary>
-        /// Provides a client instance.
+        /// Provides a instance of any type of the instance register.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="title"></param>
-        /// <returns></returns>
-        public IProtocolManager GetClientInstance(InstanceType type, string title)
+        /// <param name="type">Type of the searched instance.</param>
+        /// <param name="title">Unique title of searched instance.</param>
+        /// <returns>Protocol manager instance if it is known.</returns>
+        public IProtocolManager GetInstance(InstanceType type, string title)
         {
             return register.ProvideInstance(type, title) as IProtocolManager;
         }
 
-        public Dictionary<string, object> GetClientInstances(InstanceType type)
+        /// <summary>
+        /// Provides all instances of any type of the instance register.
+        /// </summary>
+        /// <param name="type">Type of the searched instances.</param>
+        /// <returns>Dictionary containing all instances with their title as key.</returns>
+        public Dictionary<string, object> GetInstances(InstanceType type)
         {
             Dictionary<string, object> pairs = register.GetRegister(type);
-            return pairs != null ? pairs : new Dictionary<string, object>();
+            return pairs ?? new Dictionary<string, object>();
         }
     }
 }
