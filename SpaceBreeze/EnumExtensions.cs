@@ -13,11 +13,21 @@ namespace JDPDO.SpaceBreeze.Extensions
     /// </remarks>
     public static class EnumExtensions
     {
+        /// <summary>
+        /// Returns flags of a enum value.
+        /// </summary>
+        /// <param name="value">The value which flags are to provide.</param>
+        /// <returns>A collection.</returns>
         public static IEnumerable<Enum> GetFlags(this Enum value)
         {
             return GetFlags(value, Enum.GetValues(value.GetType()).Cast<Enum>().ToArray());
         }
 
+        /// <summary>
+        /// Returns all individual flags of a enum value, so that all values containing multiple bits are left out.
+        /// </summary>
+        /// <param name="value">The value which individual flags are to provide.</param>
+        /// <returns>A collection.</returns>
         public static IEnumerable<Enum> GetIndividualFlags(this Enum value)
         {
             return GetFlags(value, GetFlagValues(value.GetType()).ToArray());
@@ -27,6 +37,7 @@ namespace JDPDO.SpaceBreeze.Extensions
         {
             ulong bits = Convert.ToUInt64(value);
             List<Enum> results = new List<Enum>();
+            // For each element in values Array.
             for (int i = values.Length - 1; i >= 0; i--)
             {
                 ulong mask = Convert.ToUInt64(values[i]);
@@ -47,8 +58,14 @@ namespace JDPDO.SpaceBreeze.Extensions
             return Enumerable.Empty<Enum>();
         }
 
+        /// <summary>
+        /// Returns all flag values of an given enumeration type.
+        /// </summary>
+        /// <param name="enumType">The enumeration type which flag values should be revealed.</param>
+        /// <returns>A collection with all flag values in enumeration type. Empty if there are none or the zero value.</returns>
         private static IEnumerable<Enum> GetFlagValues(Type enumType)
         {
+            // Represents the position in the enumeration type.
             ulong flag = 0x1;
             foreach (var value in Enum.GetValues(enumType).Cast<Enum>())
             {
