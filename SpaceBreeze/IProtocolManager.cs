@@ -5,8 +5,13 @@ using System.IO;
 
 namespace JDPDO.SpaceBreeze
 {
-    interface IProtocolManager
+    public interface IProtocolManager
     {
+        /// <summary>
+        /// Provides the type of managed client.
+        /// </summary>
+        string Type { get; }
+
         /// <summary>
         /// Provides the directory type of the manager.
         /// </summary>

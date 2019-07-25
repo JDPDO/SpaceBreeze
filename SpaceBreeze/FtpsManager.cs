@@ -9,9 +9,11 @@ using IO = System.IO;
 
 namespace JDPDO.SpaceBreeze
 {
-    class FtpsRemoteManager : IProtocolManager
+    public class FtpsRemoteManager : IProtocolManager
     {
         private FtpClient client;
+
+        public string Type { get => "FTP"; }
 
         public InstanceType InstanceType => InstanceType.FtpsDirectory;
 
@@ -22,9 +24,9 @@ namespace JDPDO.SpaceBreeze
         /// <param name="port">The remote connection port.</param>
         /// <param name="user">The remote user.</param>
         /// <param name="password">The remotes user password.</param>
-        public FtpsRemoteManager(string host, int port, string user, SecureString password)
+        public FtpsRemoteManager(string host, int port, string user, string password)
         {
-            client = new FtpClient(host, port, user, password.ToString());
+            client = new FtpClient(host, port, user, password);
             try
             {
                 client.Connect();
