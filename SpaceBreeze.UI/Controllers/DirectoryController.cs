@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace JDPDO.SpaceBreeze.UI.Controllers
 {
-    public class DirectoryController : Controller
+    public class DirectroyController : Controller
     {
-        public DirectoryController(IConfiguration configuration)
+        public DirectroyController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -25,7 +25,7 @@ namespace JDPDO.SpaceBreeze.UI.Controllers
         public IActionResult Index(string path = @"D:\Downloads")
         {
             FileTree<Directory> tree = new FileTree<Directory>(path);
-            IHtmlContentBuilder items = DirectoryView.GetHtmlListItems(tree);
+            IHtmlContentBuilder items = DirectoryViewModel.GetHtmlListItems(tree);
 
             foreach (var item in tree.GetSubDirectories())
             {
@@ -36,7 +36,7 @@ namespace JDPDO.SpaceBreeze.UI.Controllers
                 items.AppendHtml(
                     Ipc.RendererOnIpc(responseChannel, "directory-overview"));
 
-                IHtmlContentBuilder nextList = DirectoryView.GetHtmlListItems(tree.GetSubFileTree(item.GetUri().AbsoluteUri));
+                IHtmlContentBuilder nextList = DirectoryViewModel.GetHtmlListItems(tree.GetSubFileTree(item.GetUri().AbsoluteUri));
                 IHtmlContentBuilder error = new HtmlContentBuilder().Append("Error.");
 
                 Ipc.On(channel, responseChannel, window: null, data: nextList ?? error);
