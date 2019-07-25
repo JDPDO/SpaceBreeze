@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using JDPDO.SpaceBreeze.Extensions;
 
 namespace JDPDO.SpaceBreeze
 {
@@ -30,16 +31,42 @@ namespace JDPDO.SpaceBreeze
         /// </summary>
         private Dictionary<InstanceType, Dictionary<string, object>> registers;
 
-        private InstanceRegister(IEnumerable<KeyValuePair<InstanceType, Dictionary<string, object>>> collection)
+        public InstanceRegister(IEnumerable<KeyValuePair<InstanceType, Dictionary<string, object>>> collection)
         {
-            // Init register.
-            registers = new Dictionary<InstanceType, Dictionary<string, object>>(collection);
+            // Init register with collection if given or not if not given.
+            registers = (collection != null) ? new Dictionary<InstanceType, Dictionary<string, object>>(collection) : new Dictionary<InstanceType, Dictionary<string, object>>();
 
-            // Declare first InstanceRegister to Type.
+            // Declare first InstanceRegister to Type if none declared before.
             if (firstInstanceRegister == null) firstInstanceRegister = this;
         }
 
         public InstanceRegister() : this(null) { }
+
+        /// <summary>
+        /// Returns all subregisters for given types ('InstanceType').
+        /// </summary>
+        /// <param name="type">To returning registers of types or type.</param>
+        /// <returns>NUll if none subregister was found.</returns>
+        public Dictionary<string, object> GetRegister(InstanceType type)
+        {
+            // Check if key exists in registers.
+            if (registers.ContainsKey(type))
+            {
+                List<Enum> individualFlags = type.GetIndividualFlags() as List<Enum>;
+                Enum[] enums = individualFlags.Count > 0 ? individualFlags.ToArray() : null;
+                Dictionary<string, object> pairs = new Dictionary<string, object>();
+                if (enums == null)
+                {
+                    foreach (Enum subEnum in enums)
+                    {
+                        InstanceType subtype = (InstanceType)subEnum;
+                        pairs.Add(subtype.ToString(), registers[subtype]);
+                    }
+                }
+                return pairs;
+            }
+            return null;
+        }
 
         /// <summary>
         /// Registers an instance.
@@ -73,7 +100,7 @@ namespace JDPDO.SpaceBreeze
         /// <param name="type">The instance type of the object to be provided.</param>
         /// <param name="id">The id of the instance to be provided.</param>
         /// <returns>The instance to given id.</returns>
-        internal object ProvideInstance(InstanceType type, string id)
+        public object ProvideInstance(InstanceType type, string id)
         {
             if (type != InstanceType.Unknown && String.IsNullOrEmpty(id))
             {
