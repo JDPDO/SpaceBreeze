@@ -16,5 +16,6 @@ namespace JDPDO.SpaceBreeze
         LocalDirectory = 0x03,
         FtpsDirectory = 0x04,
         FtpsClient = 0x05,
+        BrowserWindow = 0x06,
     }
 }
