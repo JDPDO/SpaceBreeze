@@ -74,7 +74,7 @@ namespace JDPDO.SpaceBreeze
         /// <param name="type">The instance type of the object to be registered.</param>
         /// <param name="id">A id for the instance to be registered.</param>
         /// <param name="instance">The instance to be registered.</param>
-        public void RegisterInstance(InstanceType type, string id, in object instance)
+        public void RegisterInstance(InstanceType type, string id, object instance)
         {
             if (instance != null)
             {
