@@ -1,4 +1,4 @@
-# ![logo](https://raw.githubusercontent.com/JDPDO/spacebreeze/master/SpaceBreeze.UI/wwwroot/images/logo/spacebreeze.logo2.svg) SpaceBreeze - Backup and remote file manager: the easy one
+# SpaceBreeze - Backup and remote file manager: the easy one
 ![Overview](https://raw.githubusercontent.com/JDPDO/spacebreeze/e_pictures/pic_overview.jpg)
 
 ## Execution via electron
