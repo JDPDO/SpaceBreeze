@@ -1,0 +1,65 @@
+﻿@model System.Collections.Generic.Dictionary<string, object>
+@using JDPDO.SpaceBreeze;
+
+<div class="uk-container uk-container-large uk-margin-top">
+    <h1 class="uk-heading-line uk-text-left uk-text-uppercase"><span>server</span></h1>
+    <h2 class="uk-heading-line uk-text-right uk-text-uppercase"><span>overview</span></h2>
+    <table class="uk-table uk-table-divider uk-table-middle uk-width-1-1 uk-margin-remove-top">
+        <thead>
+            <tr>
+                <th class="uk-table-shrink">Type</th>
+                <th>Title</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (KeyValuePair<string, object> pair in Model)
+            {
+                string type = (pair.Value as IProtocolManager).Type;
+                string id = pair.Key;
+                <tr>
+                    <td>@type</td>
+                    <td>@id</td>
+                    <td>
+                        <ul class="uk-iconnav">
+                            <li><a asp-route="API/Server" asp-route-id="@id" uk-icon="icon: play-circle; ratio: 1;" class="icon-scale"></a></li>
+                            <li><a asp-route="API/Server" asp-route-id="@id" uk-icon="icon: info; ratio: 1;" class="icon-scale"></a></li>
+                            <li><a asp-route="API/Server" asp-route-id="@id" uk-icon="icon: delete; ratio: 1;" class="icon-scale"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2 class="uk-heading-line uk-text-right uk-text-uppercase"><span>add server</span></h2>
+
+    <ul uk-tab>
+        <li class="uk-active"><a href="">general</a></li>
+        <li><a>advanced</a></li>
+        <li><a></a></li>
+    </ul>
+    <form asp-route="API/Server/Add" method="get" class="uk-flex uk-grid-small" uk-grid>
+        <div class="uk-flex-auto"><input class="uk-input" name="title" type="text" placeholder="Title to show"></div>
+        <div class="uk-flex-auto">
+            <select class="uk-select" name="type">
+                <option>FTP</option>
+                <option>FTPS</option>
+                <option>Storj</option>
+            </select>
+        </div>
+        <div class="uk-flex-auto"><input class="uk-input" name="host" type="text" placeholder="Host (Domain/IP)"></div>
+        <div class="uk-flex-auto"><input class="uk-input" name="user" type="text" placeholder="User"></div>
+        <div class="uk-flex-auto"><input class="uk-input" name="password" type="password" placeholder="Password"></div>
+        <div class="uk-flex-auto">
+            <select class="uk-select" name="a_type">
+                <option>If accessable explicit FTP over TLS.</option>
+                <option>Explicit FTP over TLS.</option>
+                <option>Implizit FTP over TLS.</option>
+            </select>
+        </div>
+        <div class="uk-width-1-1 uk-text-right">
+            <button class="uk-button uk-button-primary" name="submit" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

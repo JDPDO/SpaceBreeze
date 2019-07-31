@@ -12,13 +12,13 @@ namespace JDPDO.SpaceBreeze.UI.Controllers
 {
     public class OverviewController : Controller
     {
-        InstanceRegister register;
-        ServerModel serverClientModel;
+        //InstanceRegister register;
+        RemoteClientModel serverClientModel;
 
         public OverviewController(IConfiguration configuration)
         {
             _configuration = configuration;
-            serverClientModel = new ServerModel();
+            serverClientModel = new RemoteClientModel();
         }
 
         private IConfiguration _configuration;
@@ -28,27 +28,35 @@ namespace JDPDO.SpaceBreeze.UI.Controllers
             return View();
         }
 
-        #region Server
-        public IActionResult AddServerClient(string type, string title, string host, int port, string user, string password)
+        #region Server links
+        public IActionResult Server()
+        {
+            return View(serverClientModel.GetInstances(InstanceType.FtpsClient));
+        }
+
+        public IActionResult AddServerLink(string type, string title, string host, int port, string user, string password)
         {
             if (String.IsNullOrEmpty(type) && String.IsNullOrEmpty(title) && String.IsNullOrEmpty(host) && String.IsNullOrEmpty(user) && port == 0) return NoContent();
             serverClientModel.CreateClientInstance((InstanceType)System.Enum.Parse(typeof(InstanceType), type), title, host, port, user, password);
             return View("Index");
         }
 
-        public IActionResult EditServerClient(string type, string title, string host = null, int port = -1, string user = null, string password = null)
+        public IActionResult EditServerLink(string type, string title, string host = null, int port = -1, string user = null, string password = null)
         {
             throw new NotImplementedException();
         }
 
-        public IActionResult RemoveServerClient(string type, string title)
+        public IActionResult RemoveServerLink(string type, string title)
         {
             throw new NotImplementedException();
         }
         #endregion
 
         #region Settings
-
+        public IActionResult Settings()
+        {
+            return View();
+        }
         #endregion
     }
 }
