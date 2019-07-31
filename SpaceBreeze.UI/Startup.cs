@@ -45,7 +45,7 @@ namespace JDPDO.SpaceBreeze.UI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Server}/{action=Index}/{id?}");
+                    template: "{controller=Overview}/{action=Server}/{id?}");
             });
 
             BootstrapElectron();
