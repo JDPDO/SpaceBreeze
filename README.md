@@ -2,10 +2,7 @@
 ![Overview](https://raw.githubusercontent.com/JDPDO/spacebreeze/e_pictures/pic_overview.jpg)
 
 ## Execution via electron
-  Starting app for testing purposes: navigate in folder Mittuntur.UI an run in console
-  '''
-  electronize start
-  ''' 
+  Starting app for testing purposes: navigate in folder Mittuntur.UI an run in console `electronize start`. 
 
 ## Features in work
 - Manage local files and directories: copy, paste, move, change attributes, return folder content, ...
