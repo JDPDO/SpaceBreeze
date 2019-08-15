@@ -26,9 +26,9 @@ namespace JDPDO.SpaceBreeze
         /// <param name="password">The remotes user password.</param>
         public FtpsRemoteManager(string host, int port, string user, string password)
         {
-            client = new FtpClient(host, port, user, password);
             try
             {
+                client = new FtpClient(host, port, user, password);
                 client.Connect();
             }
             catch (ObjectDisposedException e)
