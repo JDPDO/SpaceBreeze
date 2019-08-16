@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using JDPDO.SpaceBreeze.Extensions;
 
 namespace JDPDO.SpaceBreeze
 {
@@ -32,7 +33,7 @@ namespace JDPDO.SpaceBreeze
             // Get first instance register object for instance storing.
             firstInstanceRegister = InstanceRegister.GetFirstInstanceRegister();
             // Store this instance into instance register.
-            firstInstanceRegister.RegisterInstance(manager.InstanceType, path, this);
+            firstInstanceRegister.RegisterInstance(manager.GetTypeName(), path, this);
         }
 
         public override bool Delete()

@@ -15,8 +15,6 @@ namespace JDPDO.SpaceBreeze
 
         public string Type { get => "FTP"; }
 
-        public InstanceType InstanceType => InstanceType.FtpsDirectory;
-
         /// <summary>
         /// Creates a new instance with given host, user, password and port.
         /// </summary>

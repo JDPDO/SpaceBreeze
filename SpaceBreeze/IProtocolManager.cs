@@ -13,11 +13,6 @@ namespace JDPDO.SpaceBreeze
         string Type { get; }
 
         /// <summary>
-        /// Provides the directory type of the manager.
-        /// </summary>
-        InstanceType InstanceType { get; }
-
-        /// <summary>
         /// Copies an item only on the system of the managed server.
         /// </summary>
         /// <param name="item">The file or directory to copy.</param>

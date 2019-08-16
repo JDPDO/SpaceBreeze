@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using JDPDO.SpaceBreeze.Extensions;
 
 namespace JDPDO.SpaceBreeze
 {
@@ -29,12 +28,14 @@ namespace JDPDO.SpaceBreeze
         /// <summary>
         /// Containing register for various types that are holding instances of that classes. 
         /// </summary>
-        private Dictionary<InstanceType, Dictionary<string, object>> registers;
+        private Dictionary<string, Dictionary<string, object>> registers;
 
-        public InstanceRegister(IEnumerable<KeyValuePair<InstanceType, Dictionary<string, object>>> collection)
+        public InstanceRegister(IEnumerable<KeyValuePair<string, Dictionary<string, object>>> collection)
         {
             // Init register with collection if given or not if not given.
-            registers = (collection != null) ? new Dictionary<InstanceType, Dictionary<string, object>>(collection) : new Dictionary<InstanceType, Dictionary<string, object>>();
+            registers = (collection != null)
+                ? new Dictionary<string, Dictionary<string, object>>(collection) 
+                : new Dictionary<string, Dictionary<string, object>>();
 
             // Declare first InstanceRegister to Type if none declared before.
             if (firstInstanceRegister == null) firstInstanceRegister = this;
@@ -43,29 +44,13 @@ namespace JDPDO.SpaceBreeze
         public InstanceRegister() : this(null) { }
 
         /// <summary>
-        /// Returns all subregisters for given types ('InstanceType').
+        /// Returns all subregisters for given types.
         /// </summary>
         /// <param name="type">To returning registers of types or type.</param>
         /// <returns>NUll if none subregister was found.</returns>
-        public Dictionary<string, object> GetRegister(InstanceType type)
+        public Dictionary<string, object> GetSubRegister(string type)
         {
-            // Check if key exists in registers.
-            if (registers.ContainsKey(type))
-            {
-                List<Enum> individualFlags = type.GetIndividualFlags() as List<Enum>;
-                Enum[] enums = individualFlags.Count > 0 ? individualFlags.ToArray() : null;
-                Dictionary<string, object> pairs = new Dictionary<string, object>();
-                if (enums == null)
-                {
-                    foreach (Enum subEnum in enums)
-                    {
-                        InstanceType subtype = (InstanceType)subEnum;
-                        pairs.Add(subtype.ToString(), registers[subtype]);
-                    }
-                }
-                return pairs;
-            }
-            return null;
+            return registers.ContainsKey(type) ? registers[type] : null;
         }
 
         /// <summary>
@@ -74,7 +59,7 @@ namespace JDPDO.SpaceBreeze
         /// <param name="type">The instance type of the object to be registered.</param>
         /// <param name="id">A id for the instance to be registered.</param>
         /// <param name="instance">The instance to be registered.</param>
-        public void RegisterInstance(InstanceType type, string id, object instance)
+        public void RegisterInstance(string type, string id, object instance)
         {
             if (instance != null)
             {
@@ -100,9 +85,9 @@ namespace JDPDO.SpaceBreeze
         /// <param name="type">The instance type of the object to be provided.</param>
         /// <param name="id">The id of the instance to be provided.</param>
         /// <returns>The instance to given id.</returns>
-        public object ProvideInstance(InstanceType type, string id)
+        public object ProvideInstance(string type, string id)
         {
-            if (type != InstanceType.Unknown && String.IsNullOrEmpty(id))
+            if (!(String.IsNullOrEmpty(type) && String.IsNullOrEmpty(id)))
             {
                 return registers[type][id];
             }
