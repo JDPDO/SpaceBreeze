@@ -6,7 +6,7 @@ using JDPDO.SpaceBreeze.Extensions;
 
 namespace JDPDO.SpaceBreeze
 {
-    class ManagedDirectory : Directory
+    public class ManagedDirectory : Directory
     {
         /// <summary>
         /// Stores the manager of this directory.
