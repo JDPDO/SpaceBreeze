@@ -7,8 +7,10 @@
 
     <!-- Uikit -->
     <link rel="stylesheet" href="~/lib/uikit-3.0.3/css/uikit.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/uikit-3.0.3/js/uikit.js"></script>
     <script src="~/lib/uikit-3.0.3/js/uikit-icons.js"></script>
+    @*<script src="~/js/overview-events.js"></script>*@
 
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -23,7 +25,7 @@
         </div>
         <div class="uk-navbar-center">
             <ul class="uk-navbar-nav">
-                <li><a href=@Url.Action("server")><span class="uk-icon uk-margin-small-right" uk-icon="icon: server; ratio: 1.3;"></span>server</a></li>
+                <li><a href=@Url.Action("uplinks")><span class="uk-icon uk-margin-small-right" uk-icon="icon: server; ratio: 1.3;"></span>uplinks</a></li>
                 <li><a href=@Url.Action("settings")><span class="uk-icon uk-margin-small-right" uk-icon="icon: settings; ratio: 1.3;"></span>settings</a></li>
             </ul>
         </div>

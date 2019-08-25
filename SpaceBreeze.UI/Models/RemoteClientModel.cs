@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace JDPDO.SpaceBreeze.UI.Models
 {
+#if WITH_ERRORS
     public class RemoteClientModel
     {
         /// <summary>
@@ -125,4 +126,5 @@ namespace JDPDO.SpaceBreeze.UI.Models
             window.OnReadyToShow += () => window.Show(); 
         }
     }
+#endif
 }

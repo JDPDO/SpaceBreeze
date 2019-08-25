@@ -12,6 +12,8 @@ namespace JDPDO.SpaceBreeze.UI
         // Adding localisation field
         // readonly IStringLocalizer localizer;
 
+        private InstanceRegister register;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -45,12 +47,15 @@ namespace JDPDO.SpaceBreeze.UI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Overview}/{action=Server}/{id?}");
+                    template: "{controller=Overview}/{action=Index}/{id?}");
             });
 
             BootstrapElectron();
         }
 
+        /// <summary>
+        /// Bootstrap and set up electron environment.
+        /// </summary>
         public async void BootstrapElectron()
         {
             var options = new BrowserWindowOptions

@@ -1,0 +1,98 @@
+﻿@model System.Collections.Generic.Dictionary<string, object>
+@using JDPDO.SpaceBreeze;
+
+<div class="uk-container uk-container-large uk-margin-top">
+    <h1 class="uk-heading-line uk-text-left uk-text-uppercase"><span>uplinks</span></h1>
+    @if (Model.Count > 0)
+    {
+        <h2 class="uk-heading-line uk-text-right uk-text-uppercase"><span>overview</span></h2>
+        <table class="uk-table uk-table-divider uk-table-middle uk-width-1-1 uk-margin-remove-top" id="uplink_overview-table">
+            <thead>
+                <tr>
+                    <th class="uk-table-shrink">Type</th>
+                    <th>Title</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody id="uplink_overview-table-body">
+                @foreach (KeyValuePair<string, object> pair in Model)
+                {
+                    var value = pair.Value as UplinkModel;
+                    string id = pair.Key;
+                    <tr>
+                        <td>@value.Type</td>
+                        <td>@value.Title</td>
+                        <td>
+                            <ul class="uk-iconnav">
+                                <li><a href="/api/uplink/open/@value.Title" uk-icon="icon: play-circle; ratio: 1;" class="icon-scale"></a></li>
+                                <li><a href="/api/uplink/info/@value.Title" uk-icon="icon: info; ratio: 1;" class="icon-scale"></a></li>
+                                <li><a href="/api/uplink/remove/@value.Title" uk-icon="icon: trash; ratio: 1;" class="icon-scale"></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        @Ipc.GetScriptElement("UIkit.notification({ message: 'There are no uplinks available yet, define at least one server uplink below!', pos: 'bottom-left', status: 'warning' });");
+    }
+
+    <h2 class="uk-heading-line uk-text-right uk-text-uppercase"><span>add server uplink</span></h2>
+
+    <ul uk-tab>
+        <li class="uk-active"><a href="">general</a></li>
+        <li><a>advanced</a></li>
+        <li><a></a></li>
+    </ul>
+    <form id="ajax-uplink-add" method="post" class="uk-flex uk-grid-small" action="/api/uplink/add" uk-grid>
+        <div class="uk-flex-auto"><input class="uk-input" name="title" type="text" placeholder="Title to show"></div>
+        <div class="uk-flex-auto">
+            <select class="uk-select" name="type">
+                <option>FTP</option>
+                <option>FTPS</option>
+                <option>Storj</option>
+            </select>
+        </div>
+        <div class="uk-flex-auto"><input class="uk-input" name="host" type="text" placeholder="Host (Domain/IP)"></div>
+        <div class="uk-flex-auto"><input class="uk-input" name="user" type="text" placeholder="User"></div>
+        <div class="uk-flex-auto"><input class="uk-input" name="password" type="password" placeholder="Password"></div>
+        <div class="uk-width-1-1 uk-text-right">
+            <button class="uk-button uk-button-primary" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    // Setting up ipc renderer object
+    const {ipcRenderer} = require("electron");
+
+    //ipcRenderer.on('overview-uplink', (event, arg) => {
+    //    switch (arg) {
+    //        case 'created':
+    //            getUplinkOverviewTable();
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //});
+
+    function getUplinksTable(e = new Event('submit')) {
+        $.ajax({
+            url: "api/uplinks",
+            type: "POST",
+            cache: false,
+            success: function (data) {
+                var tbody = $('#uplink_overview-table-body');
+                tbody.empty();
+
+                $.each(data, function (key, value) {
+                    const tr = $("<tr></tr>")
+                        .append(
+                            $("<td></td>")
+                        )
+                });
+            },
+        });
+    }
+</script>
