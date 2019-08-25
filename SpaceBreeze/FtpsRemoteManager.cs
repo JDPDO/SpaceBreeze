@@ -269,5 +269,7 @@ namespace JDPDO.SpaceBreeze
             if (client.DirectoryExists(path)) return true;
             return false;
         }
+
+        public ManagedDirectory GetWorkingDirectory() => new ManagedDirectory(client.GetWorkingDirectory(), this);
     }
 }

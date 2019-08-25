@@ -103,5 +103,11 @@ namespace JDPDO.SpaceBreeze
         /// <param name="item">The directory which children will be enumerated.</param>
         /// <returns></returns>
         IEnumerable<IFileSystemItem> EnumerateChildren(Directory item);
+
+        /// <summary>
+        /// Returns current working directory.
+        /// </summary>
+        /// <returns></returns>
+        ManagedDirectory GetWorkingDirectory();
     }
 }
