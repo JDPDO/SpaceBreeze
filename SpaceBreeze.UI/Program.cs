@@ -8,7 +8,6 @@ namespace JDPDO.SpaceBreeze.UI
     public class Program
     {
         private static IWebHost host;
-        private InstanceRegister register;
 
         public static void Main(string[] args)
         {
