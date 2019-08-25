@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JDPDO.SpaceBreeze.Extensions
 {
-    static class TypeExtension
+    public static class TypeExtension
     {
         public static string GetTypeName(this object instance) => instance.GetType().Name;
     }
