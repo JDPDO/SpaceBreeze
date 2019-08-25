@@ -50,7 +50,7 @@ namespace JDPDO.SpaceBreeze
         /// <returns>NUll if none subregister was found.</returns>
         public Dictionary<string, object> GetSubRegister(string type)
         {
-            return registers.ContainsKey(type) ? registers[type] : null;
+            return registers.ContainsKey(type) ? registers[type] : new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -87,13 +87,46 @@ namespace JDPDO.SpaceBreeze
         /// <returns>The instance to given id.</returns>
         public object ProvideInstance(string type, string id)
         {
-            if (!(String.IsNullOrEmpty(type) && String.IsNullOrEmpty(id)))
+            try
             {
-                return registers[type][id];
+                if (!(String.IsNullOrEmpty(type) && String.IsNullOrEmpty(id)))
+                {
+                    return registers[type][id];
+                }
+            }
+            catch (Exception e)
+            {
+                ExceptionHandler.LogException(e);
             }
             // If an argument equals null.
             ExceptionHandler.NewArgumentNullException(nameof(id), "The id value have to be defined.");
             return null;
+        }
+
+        /// <summary>
+        /// Removes an instance of the register.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <returns>True if removing succeed, else false.</returns>
+        public bool RemoveInstance(string type, string id)
+        {
+            try { return registers[type].Remove(id); }
+            catch (Exception e) { ExceptionHandler.LogException(e); }
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if instance exists.
+        /// </summary>
+        /// <param name="type">Type of checked instance.</param>
+        /// <param name="id">Identifier of instance.</param>
+        /// <returns></returns>
+        public bool InstanceExists(string type, string id)
+        {
+            try { return registers[type].ContainsKey(id); }
+            catch (Exception e) { ExceptionHandler.LogException(e); }
+            return false;
         }
     }
 }
