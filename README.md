@@ -1,3 +1,4 @@
+![GitHub](https://img.shields.io/github/license/JDPDO/spacebreeze)
 # SpaceBreeze - Backup and remote file manager: the easy one
 ![Overview](https://raw.githubusercontent.com/JDPDO/spacebreeze/e_pictures/pic_overview.jpg)
 
