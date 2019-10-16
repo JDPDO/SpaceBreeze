@@ -1,5 +1,6 @@
 # SpaceBreeze - Backup and remote file manager: the easy one
 ![GitHub](https://img.shields.io/github/license/JDPDO/spacebreeze)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/JDPDO/spacebreeze)
 ![Overview](https://raw.githubusercontent.com/JDPDO/spacebreeze/e_pictures/pic_overview.jpg)
 
 ## Execution via electron
