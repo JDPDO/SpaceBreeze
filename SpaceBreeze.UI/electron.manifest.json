@@ -1,32 +1,3 @@
 {
-  "executable": "{{executable}}",
-  "splashscreen": {
-    "imageFile": ""
-  },
-  "singleInstance": false,
-  "build": {
-    "appId": "electron.SpaceBreeze.app",
-    "productName": "{{executable}}",
-    "copyright": "Copyright © 2019 JDPDO",
-    "buildVersion": "",
-    "compression": "maximum",
-    "directories": {
-      "output": "../../../bin/Desktop"
-    },
-    "extraResources": [
-      {
-        "from": "./bin",
-        "to": "bin",
-        "filter": [ "**/*" ]
-      }
-    ],
-    "files": [
-      {
-        "from": "./ElectronHostHook/node_modules",
-        "to": "ElectronHostHook/node_modules",
-        "filter": [ "**/*" ]
-      },
-      "**/*"
-    ]
-  }
+  "executable": "JDPDO.SpaceBreeze.UI"
 }
