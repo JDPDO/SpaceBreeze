@@ -27,12 +27,5 @@ namespace JDPDO.SpaceBreeze
             Exception outerException = new Exception(message, innerException);
             LogException(outerException);
         }
-
-        /// <summary>
-        /// Creates new ArgumentNullException and logs it to standard error stream.
-        /// </summary>
-        /// <param name="paramName">The name of the parameter that caused the exception.</param>
-        /// <param name="message">A message that describe the error.</param>
-        public static void NewArgumentNullException(string paramName, string message) => LogException(new ArgumentNullException(paramName, message));
     }
 }
