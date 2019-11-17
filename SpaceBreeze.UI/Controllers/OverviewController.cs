@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Text.Encodings.Web;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using JDPDO.SpaceBreeze;
@@ -15,8 +16,8 @@ namespace JDPDO.SpaceBreeze.UI.Controllers
 {
     public class OverviewController : Controller
     {
-        OverviewWindowModel model;
-        private IConfiguration _configuration;
+        readonly OverviewWindowModel model;
+        private readonly IConfiguration _configuration;
 
         public OverviewController(IConfiguration configuration)
         {
@@ -60,12 +61,10 @@ namespace JDPDO.SpaceBreeze.UI.Controllers
             {
                 // Create new uplink model instance and put to global instance register.
                 UplinkModel uplink = new UplinkModel() { Host = host, Title = title, Type = type, User = user, Password = password };
-                model.RegisterInstance("uplink", title, uplink);
+                if (model.RegisterInstance("uplink", title, uplink)) return new OkResult();
+                else return new BadRequestResult();
             }
             else return EditUplink(title, null, type, host, -1, user, password);
-
-            Response.StatusCode = (int)HttpStatusCode.OK;
-            return RedirectToAction("uplinks");
         }
 
         /// <summary>
@@ -82,26 +81,29 @@ namespace JDPDO.SpaceBreeze.UI.Controllers
         [HttpPost("/api/uplink/edit/{title}")]
         public IActionResult EditUplink(string title, string newTitle = null, string type = null, string host = null, int port = -1, string user = null, string password = null)
         {
-            if (!String.IsNullOrWhiteSpace(title))
+            UplinkModel uplink = (UplinkModel)model.ProvideInstance("uplink", title);
+            if (uplink != null)
             {
-
-                UplinkModel uplink = (UplinkModel)model.ProvideInstance("uplink", title);
-                // Apply changed values.
+                /* Assign new properties. */
+                // type
                 if (!String.IsNullOrWhiteSpace(type)) uplink.Type = type;
+                // title
                 if (!String.IsNullOrWhiteSpace(newTitle)) uplink.Title = newTitle;
+                // host
                 if (!String.IsNullOrWhiteSpace(host)) uplink.Host = host;
+                // port
                 if (port != -1) uplink.Host = new UriBuilder(uplink.Type, uplink.Host, port).Path;
+                // user
                 if (!String.IsNullOrWhiteSpace(user)) uplink.User = user;
+                // password
                 if (!String.IsNullOrWhiteSpace(password)) uplink.Password = password;
 
                 // Register edited uplink and delete old instance.
-                model.RemoveInstance(uplink.Type, title);
-                model.RegisterInstance(uplink.Type, uplink.Title, uplink);
+                if (model.RemoveInstance(uplink.Type, title)) model.RegisterInstance(uplink.Type, uplink.Title, uplink);
 
-                Response.StatusCode = (int)HttpStatusCode.OK;
+                return Ok();
             }
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            return RedirectToAction("Uplinks");
+            return BadRequest();
         }
 
         /// <summary>
@@ -112,16 +114,14 @@ namespace JDPDO.SpaceBreeze.UI.Controllers
         [Route("/api/uplink/remove/{title}")]
         public IActionResult RemoveUplink(string title)
         {
-            Response.StatusCode = (int)(model.RemoveInstance("uplink", title) ? HttpStatusCode.OK : HttpStatusCode.NotFound);
-            return RedirectToAction("Uplinks");
+            return model.RemoveInstance("uplink", title) ? Ok() : (StatusCodeResult) BadRequest();
         }
 
         [Route("/api/uplink/open/{title}")]
-        public IActionResult OpenUplink(string title)
+        public async Task<IActionResult> OpenUplink(string title)
         {
-            model.OpenUplinkWindow(title);
-            Response.StatusCode = (int)HttpStatusCode.OK;
-            return RedirectToAction("Uplinks");
+            bool success = await model.OpenUplinkWindowAsync(title);
+            return (success) ? Ok() : StatusCode(500);
         }
 
         #endregion
