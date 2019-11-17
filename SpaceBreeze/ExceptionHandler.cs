@@ -7,7 +7,7 @@ namespace JDPDO.SpaceBreeze
 {
     public static class ExceptionHandler
     {
-        public static Stack<Exception> Exceptions { get; private set; }
+        public static Stack<Exception> Exceptions { get; private set; } = new Stack<Exception>();
 
         /// <summary>
         /// Logs a thrown exception to standard error stream.
