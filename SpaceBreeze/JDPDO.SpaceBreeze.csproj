@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>JDPDO.SpaceBreeze</AssemblyName>
     <RootNamespace>JDPDO.SpaceBreeze</RootNamespace>
   </PropertyGroup>
@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentFTP" Version="26.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.2" />
+    <PackageReference Include="FluentFTP" Version="28.0.1" />
   </ItemGroup>
 
 </Project>

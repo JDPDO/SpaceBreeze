@@ -1,19 +1,17 @@
 ﻿using ElectronNET.API;
 using ElectronNET.API.Entities;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
 
 namespace JDPDO.SpaceBreeze.UI
 {
     public class Startup
     {
-        // Adding localisation field
-        // readonly IStringLocalizer localizer;
-
-        private InstanceRegister register;
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,17 +22,16 @@ namespace JDPDO.SpaceBreeze.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc((opt) => opt.EnableEndpointRouting = false);
             services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
@@ -44,11 +41,11 @@ namespace JDPDO.SpaceBreeze.UI
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Overview}/{action=Index}/{id?}");
-            });
+              {
+                  routes.MapRoute(
+                      name: "default",
+                      template: "{controller=Overview}/{action=Index}/{id?}");
+              });
 
             BootstrapElectron();
         }
