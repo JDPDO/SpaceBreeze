@@ -153,8 +153,9 @@ namespace JDPDO.SpaceBreeze.UI.Models
                 }
             }
             catch (ArgumentNullException e) { ExceptionHandler.LogException("Instance and/or type is null.", e); }
-            catch (ArgumentException e) { }
-            catch (InvalidOperationException e) { }
+            catch (ArgumentException e) { ExceptionHandler.LogException(e); }
+            catch (InvalidOperationException e) { ExceptionHandler.LogException(e); }
+            catch (KeyNotFoundException e) { ExceptionHandler.LogException("The property is retrieved and type does not exist in the collection.", e); }
 
             /* Create window. */
             BrowserWindow window = await createWindow;
